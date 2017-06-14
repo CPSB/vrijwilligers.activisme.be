@@ -35,7 +35,7 @@
 
     <div class="row">
         <div class="col-md-5">
-            <h3>Roles:</h3>
+            <h3 class="modal-title">Roles:</h3>
         </div>
         <div class="col-md-7 page-action text-right">
             @can('add_roles')
