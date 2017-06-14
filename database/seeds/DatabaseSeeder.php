@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use App\Permission;
 use App\Role;
 use Illuminate\Database\Seeder;
@@ -43,18 +44,18 @@ class DatabaseSeeder extends Seeder
 
                 if ($role->name == 'Admin') {
                     // Assign all permissions 
-                    $role->syncPermissions(Permissions::all());
+                    $role->syncPermissions(Permission::all());
                     $this->command->info('Admin granted all the permissions');
                 } else {
                     // for others by default only read access.
-                    $role->syncPermissions(Permissions::where('name', 'LIKE', 'view_%')->get());
+                    $role->syncPermissions(Permission::where('name', 'LIKE', 'view_%')->get());
                 }
 
                 // create one user for each role 
                 $this->createUser($role);
             }
 
-            $this->command->info('Roles' . $input_roles . 'added successfully.');
+            $this->command->info('Roles ' . $input_roles . ' added successfully.');
         } else {
             Role::firstOrCreate(['name' => 'User']); 
             $this->command->info('Added only default user role.');
