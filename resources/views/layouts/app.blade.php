@@ -76,7 +76,7 @@
                                 <li>
                                     <a href="">
                                         <span class="fa fa-bell-o" aria-hidden="true"></span>
-                                        <span class="badge">0</span>
+                                        <span class="badge">{{ auth()->user()->notifications->count() }}</span>
                                     </a>
                                 </li>
                                 <li class="dropdown">
