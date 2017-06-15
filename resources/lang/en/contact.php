@@ -17,6 +17,7 @@ return [
     'btn-reset'                 => 'Reset',
 
     'contact-panel-heading'     => 'Any questions? Feel free to contact us.',
+    'contact-store'             => 'Your question has been send. We will get in contact soon.',
 
     'placeholder-last-name'     => 'Your lastname',
     'placeholder-first-name'    => 'YOur firstname',

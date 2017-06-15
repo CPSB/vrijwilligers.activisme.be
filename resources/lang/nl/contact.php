@@ -17,6 +17,7 @@ return [
     'btn-reset'                 => 'Reset',
 
     'contact-panel-heading'     => 'Heb je vragen? Aarzel dan niet om ons te contacteren.',
+    'contact-store'             => 'We hebben je vraag ontvangen. We nemen spoedig contact met je op!',
 
     'placeholder-last-name'     => 'Uw achternaam',
     'placeholder-first-name'    => 'Uw voornaam',
