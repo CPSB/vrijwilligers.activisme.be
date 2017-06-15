@@ -12,6 +12,11 @@ class UserController extends Controller
 {
     use Authorizable;
 
+    public function __construct()
+    {
+        $this->middleware('lang');
+    }
+
     /**
      * Display a listing of the resource.
      *

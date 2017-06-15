@@ -40,7 +40,7 @@
                                 @can('view_users')
                                     <li class="{{ Request::is('users*') ? 'active' : '' }}">
                                         <a href="{{ route('users.index') }}">
-                                            <span class="text-info glyphicon glyphicon-user"></span> Users
+                                            <span class="text-info fa fa-users"></span> Users
                                         </a>
                                     </li>
                                 @endcan
@@ -48,11 +48,22 @@
                                 @can('view_roles')
                                     <li class="{{ Request::is('roles*') ? 'active' : '' }}">
                                         <a href="{{ route('roles.index') }}">
-                                            <span class="text-danger glyphicon glyphicon-lock"></span> Roles
+                                            <span class="fa fa-lock" aria-hidden="true"></span> Roles
                                         </a>
                                     </li>
                                 @endcan
                             @endif
+
+                            <li class="{{ Request::is('contact*') ? 'active' : '' }}">
+                                <a href="">
+                                    <span class="fa fa-envelope" aria-hidden="true"></span> Contact
+                                </a>
+                            </li>
+                            <li class="{{ Request::is('disclaimer*') ? 'active' : '' }}">
+                                <a href="{{ route('disclaimer.index') }}">
+                                    <span class="fa fa-legal" aria-hidden="true"></span> Disclaimer
+                                </a>
+                            </li>
                         </ul>
 
                         <!-- Right Side Of Navbar -->
