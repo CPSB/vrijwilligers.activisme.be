@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c477e597418548b649b1a7d9710c6771",
-    "content-hash": "b03a3b247201a976c137c44a835b0b61",
+    "hash": "586ee1047f08c63903ae6044d8dfa6f2",
+    "content-hash": "213cf489b8700e0ba40d8f9e81dad4fc",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -210,6 +210,49 @@
                 "parser"
             ],
             "time": "2017-03-29 16:04:15"
+        },
+        {
+            "name": "garygreen/pretty-routes",
+            "version": "0.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/garygreen/pretty-routes.git",
+                "reference": "3b5967f0bc0c55adfab1905e750f443b2a980d50"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/garygreen/pretty-routes/zipball/3b5967f0bc0c55adfab1905e750f443b2a980d50",
+                "reference": "3b5967f0bc0c55adfab1905e750f443b2a980d50",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "PrettyRoutes\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PrettyRoutes\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gary Green",
+                    "email": "holegary@gmail.com"
+                }
+            ],
+            "description": "Pretty routes for Laravel 5.",
+            "time": "2017-06-08 14:58:27"
         },
         {
             "name": "jakub-onderka/php-console-color",
