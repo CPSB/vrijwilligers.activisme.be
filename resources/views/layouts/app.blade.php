@@ -40,7 +40,7 @@
                                 @can('view_users')
                                     <li class="{{ Request::is('users*') ? 'active' : '' }}">
                                         <a href="{{ route('users.index') }}">
-                                            <span class="text-info fa fa-users"></span> Users
+                                            <span class="fa fa-users"></span> Users
                                         </a>
                                     </li>
                                 @endcan
@@ -52,18 +52,18 @@
                                         </a>
                                     </li>
                                 @endcan
+                            @else 
+                                <li class="{{ Request::is('contact*') ? 'active' : '' }}">
+                                    <a href="{{ route('contact.index') }}">
+                                        <span class="fa fa-envelope" aria-hidden="true"></span> Contact
+                                    </a>
+                                </li>
+                                <li class="{{ Request::is('disclaimer*') ? 'active' : '' }}">
+                                    <a href="{{ route('disclaimer.index') }}">
+                                        <span class="fa fa-legal" aria-hidden="true"></span> Disclaimer
+                                    </a>
+                                </li>
                             @endif
-
-                            <li class="{{ Request::is('contact*') ? 'active' : '' }}">
-                                <a href="">
-                                    <span class="fa fa-envelope" aria-hidden="true"></span> Contact
-                                </a>
-                            </li>
-                            <li class="{{ Request::is('disclaimer*') ? 'active' : '' }}">
-                                <a href="{{ route('disclaimer.index') }}">
-                                    <span class="fa fa-legal" aria-hidden="true"></span> Disclaimer
-                                </a>
-                            </li>
                         </ul>
 
                         <!-- Right Side Of Navbar -->

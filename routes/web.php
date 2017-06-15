@@ -16,6 +16,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/home', 'HomeController@backend')->name('home');
 
+Route::resource('contact', 'ContactController');
 Route::resource('disclaimer', 'DisclaimerController');
 
 Route::group(['middleware' => ['auth']], function() {
