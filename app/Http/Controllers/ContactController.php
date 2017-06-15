@@ -36,7 +36,7 @@ class ContactController extends Controller
      */
     public function store(ContactValidator $input)
     {
-        if (Contact::store($input->except('_token'))) {
+        if (Contact::create($input->except('_token'))) {
             flash(trans('contact.contact-store'));
         }
 
