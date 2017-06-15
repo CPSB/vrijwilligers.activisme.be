@@ -5,12 +5,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- CSRF Token -->
+        {{-- CSRF Token --}}
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }} @yield('title')</title>
 
-        <!-- Styles -->
+        {{-- Styles --}}
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
@@ -53,17 +53,18 @@
                                     </li>
                                 @endcan
                             @else 
-                                <li class="{{ Request::is('contact*') ? 'active' : '' }}">
-                                    <a href="{{ route('contact.index') }}">
-                                        <span class="fa fa-envelope" aria-hidden="true"></span> Contact
-                                    </a>
-                                </li>
                                 <li class="{{ Request::is('disclaimer*') ? 'active' : '' }}">
                                     <a href="{{ route('disclaimer.index') }}">
                                         <span class="fa fa-legal" aria-hidden="true"></span> Disclaimer
                                     </a>
                                 </li>
                             @endif
+
+                            <li class="{{ Request::is('contact*') ? 'active' : '' }}">
+                                <a href="{{ route('contact.index') }}">
+                                    <span class="fa fa-envelope" aria-hidden="true"></span> Contact
+                                </a>
+                            </li>
                         </ul>
 
                         {{-- Right Side Of Navbar --}}
@@ -84,11 +85,10 @@
                                     </a>
 
                                     <ul class="dropdown-menu" role="menu">
+                                        <li><a href=""><span class="fa fa-cogs" aria-hidden="true"></span> Account settings</a></li>
                                         <li>
-                                            <a href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                                Logout
+                                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <span class="fa fa-sign-out" aria-hidden="true"></span> Logout
                                             </a>
 
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
