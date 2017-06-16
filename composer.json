@@ -12,6 +12,7 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.3.0",
+        "spatie/laravel-backup": "3.0.0",
         "spatie/laravel-permission": "^2.1"
     },
     "require-dev": {
