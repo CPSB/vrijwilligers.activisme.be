@@ -12,6 +12,11 @@ class UserController extends Controller
 {
     use Authorizable;
 
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('lang');
