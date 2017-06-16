@@ -77,7 +77,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'nl',
 
     /*
     |--------------------------------------------------------------------------
@@ -171,6 +171,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,        
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        PrettyRoutes\ServiceProvider::class,
 
         /*
          * Application Service Providers...

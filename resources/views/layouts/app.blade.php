@@ -5,12 +5,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- CSRF Token -->
+        {{-- CSRF Token --}}
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }} @yield('title')</title>
 
-        <!-- Styles -->
+        {{-- Styles --}}
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
@@ -19,7 +19,7 @@
                 <div class="container">
                     <div class="navbar-header">
 
-                        <!-- Collapsed Hamburger -->
+                        {{-- Collapsed Hamburger --}}
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                             <span class="sr-only">Toggle Navigation</span>
                             <span class="icon-bar"></span>
@@ -27,20 +27,20 @@
                             <span class="icon-bar"></span>
                         </button>
 
-                        <!-- Branding Image -->
+                        {{-- Branding Image --}}
                         <a class="navbar-brand" href="{{ url('/') }}">
                             {{ config('app.name', 'Laravel') }}
                         </a>
                     </div>
 
                     <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                        <!-- Left Side Of Navbar -->
+                        {{-- Left Side Of Navbar --}}
                         <ul class="nav navbar-nav">
                             @if (Auth::check())
                                 @can('view_users')
                                     <li class="{{ Request::is('users*') ? 'active' : '' }}">
                                         <a href="{{ route('users.index') }}">
-                                            <span class="text-info glyphicon glyphicon-user"></span> Users
+                                            <span class="fa fa-users"></span> Users
                                         </a>
                                     </li>
                                 @endcan
@@ -48,31 +48,47 @@
                                 @can('view_roles')
                                     <li class="{{ Request::is('roles*') ? 'active' : '' }}">
                                         <a href="{{ route('roles.index') }}">
-                                            <span class="text-danger glyphicon glyphicon-lock"></span> Roles
+                                            <span class="fa fa-lock" aria-hidden="true"></span> Roles
                                         </a>
                                     </li>
                                 @endcan
+                            @else 
+                                <li class="{{ Request::is('disclaimer*') ? 'active' : '' }}">
+                                    <a href="{{ route('disclaimer.index') }}">
+                                        <span class="fa fa-legal" aria-hidden="true"></span> Disclaimer
+                                    </a>
+                                </li>
                             @endif
+
+                            <li class="{{ Request::is('contact*') ? 'active' : '' }}">
+                                <a href="{{ route('contact.index') }}">
+                                    <span class="fa fa-envelope" aria-hidden="true"></span> Contact
+                                </a>
+                            </li>
                         </ul>
 
-                        <!-- Right Side Of Navbar -->
+                        {{-- Right Side Of Navbar --}}
                         <ul class="nav navbar-nav navbar-right">
-                            <!-- Authentication Links -->
+                            {{-- Authentication Links --}}
                             @if (Auth::guest())
-                                <li><a href="{{ route('login') }}">Login</a></li>
-                                <li><a href="{{ route('register') }}">Register</a></li>
+                                <li><a href="{{ route('login') }}"><span class="fa fa-sign-in" aria-hidden="true"></span> Login</a></li>
                             @else
+                                <li>
+                                    <a href="">
+                                        <span class="fa fa-bell-o" aria-hidden="true"></span>
+                                        <span class="badge">{{ auth()->user()->notifications->count() }}</span>
+                                    </a>
+                                </li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                         {{ Auth::user()->name }} <span class="caret"></span>
                                     </a>
 
                                     <ul class="dropdown-menu" role="menu">
+                                        <li><a href=""><span class="fa fa-cogs" aria-hidden="true"></span> Account settings</a></li>
                                         <li>
-                                            <a href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                                Logout
+                                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <span class="fa fa-sign-out" aria-hidden="true"></span> Logout
                                             </a>
 
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -96,7 +112,7 @@
             </div>
         </div>
 
-        <!-- Scripts -->
+        {{-- Scripts --}}
         <script src="{{ asset('js/app.js') }}"></script>
 
         @stack('scripts')

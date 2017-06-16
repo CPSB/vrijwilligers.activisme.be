@@ -13,7 +13,18 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->only(['backend']);
+        $this->middleware('lang');
+    }
+
+    /**
+     * The application front-page.
+     *
+     * @return void
+     */
+    public function index()
+    {
+        return view('welcome'); 
     }
 
     /**
@@ -21,7 +32,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function backend()
     {
         return view('home');
     }

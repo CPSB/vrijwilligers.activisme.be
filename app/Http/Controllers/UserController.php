@@ -12,14 +12,27 @@ class UserController extends Controller
 {
     use Authorizable;
 
+    public function __construct()
+    {
+        $this->middleware('lang');
+    }
+
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $input)
     {
-        $result = User::latest()->paginate();
+        if (empty($input->get('term'))) {
+            $result = User::latest()->paginate(15);
+        } else {
+            $result = User::latest()
+                ->where('name', 'LIKE', $input->get('term'))
+                ->paginate(15);
+        }
+
         return view('user.index', compact('result'));
     }
 

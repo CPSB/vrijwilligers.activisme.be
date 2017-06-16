@@ -10,6 +10,10 @@
                     <h3 class="modal-title">{{ $result->total() }} {{ str_plural('User', $result->count()) }} </h3>
                 </div>
                 <div class="col-md-7 page-action text-right">
+                    @if ($result->count() > 15)
+                        <a hre="" class="btn btn-primary btn-sm"><span class="fa fa-search" aria-hidden="true"></span></a> 
+                    @endif
+
                     @can('add_users')
                         <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm"> <i class="glyphicon glyphicon-plus-sign"></i> Create</a>
                     @endcan
