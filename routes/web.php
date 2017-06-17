@@ -24,6 +24,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/settings/info', 'AccountSettingsController@updateInfo')->name('settings.info');
     Route::post('/settings/password', 'AccountSettingsController@updateSecurity')->name('settings.security');
 
+    Route::resource('backend/contact', 'ContactBackendController', ['names' => [
+        'index' => 'contact.backend.index'
+    ]]);
+
     Route::resource('users', 'UserController');
     Route::resource('roles', 'RoleController');
 });

@@ -69,7 +69,7 @@
                                                 </label>
 
                                                 <div class="col-md-9">
-                                                    {!! Form::text('password', old('password'), ['class' => 'form-control', 'placeholder' => trans('profile-settings.placeholder-password')]) !!}
+                                                    {!! Form::password('password', ['class' => 'form-control', 'placeholder' => trans('profile-settings.placeholder-password')]) !!}
                                                     @if ($errors->has('password')) <p class="help-block">{{ $errors->first('password') }}</p> @endif
                                                 </div>
                                             </div> {{-- /Password form-group --}}
@@ -80,7 +80,7 @@
                                                 </label>
 
                                                 <div class="col-md-9">
-                                                    {!! Form::text('password_confirmation', null, ['class' => 'form-control', 'placeholder' => trans('profile-settings.placeholder-password-confirmation')]) !!}
+                                                    {!! Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => trans('profile-settings.placeholder-password-confirmation')]) !!}
                                                     @if ($errors->has('password_confirmation')) <p class="help-block">{{ $errors->first('password_confirmation') }}</p> @endif
                                                 </div>
                                             </div> {{-- /Password confirmation form-group --}}

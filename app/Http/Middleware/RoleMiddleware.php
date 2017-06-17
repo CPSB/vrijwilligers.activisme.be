@@ -22,14 +22,14 @@ class RoleMiddleware
             return back(302);
         }
 
-        if (! $request->user()->hasRole($role)) {
-            abort(403); // Unauthorized. 
+        if (auth()->user()->hasRole($role)) {
+            return $next($request);
         }
 
-        if (! $request->user()->can($permission)) {
-            abort(403); // Unauthorized.
+        if (auth()->user()->can($permission)) {
+           return $next($request);
         }
 
-        return $next($request);
+        return abort(403);
     }
 }

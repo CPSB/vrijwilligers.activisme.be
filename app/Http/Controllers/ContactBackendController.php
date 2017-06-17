@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 
 class ContactBackendController extends Controller
 {
+    public function __construct() 
+    {
+        $this->middleware('auth'); 
+        $this->middleware('lang'); 
+        $this->middleware('role:Admin,access_contact');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +20,7 @@ class ContactBackendController extends Controller
      */
     public function index()
     {
-        //
+        return view('contact.backend-index'); 
     }
 
     /**

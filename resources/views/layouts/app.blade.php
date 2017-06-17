@@ -37,34 +37,36 @@
                         {{-- Left Side Of Navbar --}}
                         <ul class="nav navbar-nav">
                             @if (Auth::check())
-                                @can('view_users')
-                                    <li class="{{ Request::is('users*') ? 'active' : '' }}">
-                                        <a href="{{ route('users.index') }}">
-                                            <span class="fa fa-users"></span> Users
-                                        </a>
-                                    </li>
-                                @endcan
+                                @if (auth()->check() && auth()->user()->hasRole('Admin'))
+                                    @can('view_users')
+                                        <li class="{{ Request::is('users*') ? 'active' : '' }}">
+                                            <a href="{{ route('users.index') }}">
+                                                <span class="fa fa-users"></span> Users
+                                            </a>
+                                        </li>
+                                    @endcan
 
-                                @can('view_roles')
-                                    <li class="{{ Request::is('roles*') ? 'active' : '' }}">
-                                        <a href="{{ route('roles.index') }}">
-                                            <span class="fa fa-lock" aria-hidden="true"></span> Roles
-                                        </a>
-                                    </li>
-                                @endcan
-                            @else 
-                                <li class="{{ Request::is('disclaimer*') ? 'active' : '' }}">
-                                    <a href="{{ route('disclaimer.index') }}">
-                                        <span class="fa fa-legal" aria-hidden="true"></span> Disclaimer
-                                    </a>
-                                </li>
+                                    @can('view_roles')
+                                        <li class="{{ Request::is('roles*') ? 'active' : '' }}">
+                                            <a href="{{ route('roles.index') }}">
+                                                <span class="fa fa-lock" aria-hidden="true"></span> Roles
+                                            </a>
+                                        </li>
+                                    @endcan
+                                @endif
                             @endif
 
-                            <li class="{{ Request::is('contact*') ? 'active' : '' }}">
-                                @if (auth()->user()->hasRole('Admin')) 
-                                    <a href=""><span class="fa fa-envelope" aira-hidden="true"></span> Contact</a>
+                            <li class="{{ Request::is('disclaimer*') ? 'active' : '' }}">
+                                <a href="{{ route('disclaimer.index') }}">
+                                    <span class="fa fa-legal" aria-hidden="true"></span> Disclaimer
+                                </a>
+                            </li>
+
+                            <li class="{{ Request::is('contact*') ? 'active' : '' }} {{ Request::is('backend/contact*') ? 'active' : '' }}">
+                                @if (auth()->check() && auth()->user()->hasRole('Admin')) 
+                                    <a href="{{ route('contact.backend.index') }}"><span class="fa fa-envelope" aira-hidden="true"></span> Contact</a>
                                 @else 
-                                    <a href="{{ route('contact.index') }}"><span class="fa fa-envelope" aria-hidden="true"></span>Contact</a>
+                                    <a href="{{ route('contact.index') }}"><span class="fa fa-envelope" aria-hidden="true"></span> Contact</a>
                                 @endif
                             </li>
                         </ul>
