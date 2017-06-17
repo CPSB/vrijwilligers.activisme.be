@@ -47,7 +47,7 @@
     </div>
 
     @forelse ($roles as $role)
-        {!! Form::model($role, ['method' => 'PUT', 'route' => ['roles.update',  $role->id ], 'class' => 'm-b']) !!}
+        {!! Form::model($role, ['method' => 'PUT', 'route' => ['roles.update',  $role->id ], 'style' => 'margin-bottom: 25px;']) !!}
 
         @if ($role->name === 'Admin')
             @include('shared._permissions', ['title' => $role->name .' Permissions', 'options' => ['disabled'] ])
@@ -55,7 +55,7 @@
             @include('shared._permissions', ['title' => $role->name .' Permissions', 'model' => $role ])
             
             @can('edit_roles')
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Save ' . $role->name . ' permissions', ['class' => 'btn btn-primary']) !!}
             @endcan
         @endif
 

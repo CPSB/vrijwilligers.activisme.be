@@ -58,7 +58,7 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, $id)
     {
         if ($role = Role::findOrFail($id)) {
             if ($role->name === 'Admin') {  // admin role has everything
