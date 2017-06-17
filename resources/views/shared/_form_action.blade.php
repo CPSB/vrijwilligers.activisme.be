@@ -1,0 +1,2 @@
+{!! Form::button('<span class="fa fa-check" aria-hidden="true"></span> '. trans('contact.btn-send'), ['class' => 'btn btn-sm btn-success', 'type' => 'submit']) !!}
+{!! Form::button('<span class="fa fa-undo" aria-hidden="true"></span> '. trans('contact.btn-reset'), ['class' => 'btn btn-sm btn-danger', 'type' => 'submit']) !!}

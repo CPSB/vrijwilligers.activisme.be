@@ -61,9 +61,11 @@
                             @endif
 
                             <li class="{{ Request::is('contact*') ? 'active' : '' }}">
-                                <a href="{{ route('contact.index') }}">
-                                    <span class="fa fa-envelope" aria-hidden="true"></span> Contact
-                                </a>
+                                @if (auth()->user()->hasRole('Admin')) 
+                                    <a href=""><span class="fa fa-envelope" aira-hidden="true"></span> Contact</a>
+                                @else 
+                                    <a href="{{ route('contact.index') }}"><span class="fa fa-envelope" aria-hidden="true"></span>Contact</a>
+                                @endif
                             </li>
                         </ul>
 
@@ -85,7 +87,11 @@
                                     </a>
 
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href=""><span class="fa fa-cogs" aria-hidden="true"></span> Account settings</a></li>
+                                        <li>
+                                            <a href="{{ route('settings.index') }}">
+                                                <span class="fa fa-cogs" aria-hidden="true"></span> Account settings
+                                            </a>
+                                        </li>
                                         <li>
                                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                                 <span class="fa fa-sign-out" aria-hidden="true"></span> Logout

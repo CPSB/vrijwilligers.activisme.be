@@ -20,6 +20,10 @@ Route::resource('contact', 'ContactController');
 Route::resource('disclaimer', 'DisclaimerController');
 
 Route::group(['middleware' => ['auth']], function() {
+    Route::get('/settings', 'AccountSettingsController@index')->name('settings.index'); 
+    Route::post('/settings/info', 'AccountSettingsController@updateInfo')->name('settings.info');
+    Route::post('/settings/password', 'AccountSettingsController@updateSecurity')->name('settings.security');
+
     Route::resource('users', 'UserController');
     Route::resource('roles', 'RoleController');
 });

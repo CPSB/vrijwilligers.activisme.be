@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="jumbotron">
-            <h1><span class="fa fa-ban" aria-hidden="true"></span> 403 Forbidden</h1>
+            <h1><span class="fa fa-ban red" aria-hidden="true"></span> 403 Forbidden</h1>
 
             <p class="lead">
                 Sorry! You don't have access permissions for that on <em><span id="display-domain"></em>.
