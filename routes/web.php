@@ -25,7 +25,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/settings/password', 'AccountSettingsController@updateSecurity')->name('settings.security');
 
     Route::resource('backend/contact', 'ContactBackendController', ['names' => [
-        'index' => 'contact.backend.index'
+        'index' => 'contact.backend.index',
+        'store' => 'contact.backend.store'
     ]]);
 
     Route::resource('users', 'UserController');

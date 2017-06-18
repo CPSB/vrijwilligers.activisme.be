@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contact; 
 use Illuminate\Http\Request;
 
 class ContactBackendController extends Controller
@@ -20,7 +21,8 @@ class ContactBackendController extends Controller
      */
     public function index()
     {
-        return view('contact.backend-index'); 
+        $unreads = new Contact;
+        return view('contact.backend-index', compact('unreads')); 
     }
 
     /**

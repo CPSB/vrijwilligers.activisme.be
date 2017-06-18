@@ -38,21 +38,28 @@
                         <ul class="nav navbar-nav">
                             @if (Auth::check())
                                 @if (auth()->check() && auth()->user()->hasRole('Admin'))
-                                    @can('view_users')
-                                        <li class="{{ Request::is('users*') ? 'active' : '' }}">
-                                            <a href="{{ route('users.index') }}">
-                                                <span class="fa fa-users"></span> Users
-                                            </a>
-                                        </li>
-                                    @endcan
+                                     <li class="dropdown">
+                                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                            <span class="fa fa-asterisk" aria-hidden="true"></span> Logins <span class="caret"></span> 
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            @can('view_users')
+                                                <li class="{{ Request::is('users*') ? 'active' : '' }}">
+                                                    <a href="{{ route('users.index') }}">
+                                                        <span class="fa fa-user"></span> Users
+                                                    </a>
+                                                </li>
+                                            @endcan
 
-                                    @can('view_roles')
-                                        <li class="{{ Request::is('roles*') ? 'active' : '' }}">
-                                            <a href="{{ route('roles.index') }}">
-                                                <span class="fa fa-lock" aria-hidden="true"></span> Roles
-                                            </a>
-                                        </li>
-                                    @endcan
+                                            @can('view_roles')
+                                                <li class="{{ Request::is('roles*') ? 'active' : '' }}">
+                                                    <a href="{{ route('roles.index') }}">
+                                                        <span class="fa fa-lock" aria-hidden="true"></span> Roles
+                                                    </a>
+                                                </li>
+                                            @endcan
+                                        </ul>
+                                    </li>
                                 @endif
                             @endif
 
