@@ -12,6 +12,8 @@
 */
 
 Auth::routes();
+Route::get('auth/{provider}', 'Auth\SocialAuthencation@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\SocialAuthencation@handleProviderCallback');
 
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/home', 'HomeController@backend')->name('home');
@@ -20,7 +22,7 @@ Route::resource('contact', 'ContactController');
 Route::resource('disclaimer', 'DisclaimerController');
 
 Route::group(['middleware' => ['auth']], function() {
-    Route::get('/settings', 'AccountSettingsController@index')->name('settings.index'); 
+    Route::get('/settings', 'AccountSettingsController@index')->name('settings.index');
     Route::post('/settings/info', 'AccountSettingsController@updateInfo')->name('settings.info');
     Route::post('/settings/password', 'AccountSettingsController@updateSecurity')->name('settings.security');
 

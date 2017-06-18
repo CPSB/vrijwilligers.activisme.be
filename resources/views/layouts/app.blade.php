@@ -40,7 +40,7 @@
                                 @if (auth()->check() && auth()->user()->hasRole('Admin'))
                                      <li class="dropdown">
                                         <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                            <span class="fa fa-asterisk" aria-hidden="true"></span> Logins <span class="caret"></span> 
+                                            <span class="fa fa-asterisk" aria-hidden="true"></span> Logins <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu">
                                             @can('view_users')
@@ -70,9 +70,9 @@
                             </li>
 
                             <li class="{{ Request::is('contact*') ? 'active' : '' }} {{ Request::is('backend/contact*') ? 'active' : '' }}">
-                                @if (auth()->check() && auth()->user()->hasRole('Admin')) 
+                                @if (auth()->check() && auth()->user()->hasRole('Admin'))
                                     <a href="{{ route('contact.backend.index') }}"><span class="fa fa-envelope" aira-hidden="true"></span> Contact</a>
-                                @else 
+                                @else
                                     <a href="{{ route('contact.index') }}"><span class="fa fa-envelope" aria-hidden="true"></span> Contact</a>
                                 @endif
                             </li>
@@ -90,8 +90,8 @@
                                                 <div class="col-md-12">
                                                     Login via
                                                         <div class="social-buttons">
-                                                            <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-                                                            <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
+                                                            <a href="{{ url('auth/facebook') }}" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
+                                                            <a href="{{ url('auth/twitter') }}" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
                                                         </div>
                                                     or
                                                         <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">

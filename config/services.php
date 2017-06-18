@@ -35,4 +35,15 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'facebook' => [
+        'client_id'     => getenv('FACEBOOK_CLIENT_ID'),
+        'client_secret' => getenv('FACEBOOK_CLIENT_SECRET'),
+        'redirect'      => getenv('FACEBOOK_CALLBACK_REDIRECT'),
+    ],
+
+    'twitter' => [
+        'client_id'     => getenv('TWITTER_CLIENT_ID'),
+        'client_secret' => getenv('TWITTER_CLIENT_SECRET'),
+        'redirect'      => getenv('TWITTER_CALLBACK_REDIRECT'),
+    ],
 ];
