@@ -10,12 +10,12 @@
                     Unread notifications <span class="badge">{{ auth()->user()->unreadNotifications->count() }}</span>
                 </a>
                 <a href="" class="list-group-item">
-                    All notifications. <span class="badge">{{ auth()->user()->notifications->count() }}</span>
+                    All notifications.
                 </a>
             </div>
 
             <div class="list-group">
-                <a href="" class="list-group-item">
+                <a href="{{ route('notifications.all-read') }}" class="list-group-item">
                     <span class="fa fa-check" aria-hidden="true"></span> Mark all as read
                 </a>
             </div>
@@ -30,7 +30,12 @@
                         @foreach (auth()->user()->unreadNotifications as $unread)
                             <li class="list-group-item" href="test">
                                 <span style="vertical-align: middle; padding-right: 5px; color: #28a745;" class="fa fa-bell"></span>
-                                <span style="vertical-align: middle;">Ik ben een notificatie</span>
+                                <span style="vertical-align: middle;">
+                                    <a href="{{ $unread->data['url'] }}" class="text-muted">
+                                        {{ $unread->data['message'] }}
+                                        {{ $unread->markAsRead() }}
+                                    </a>
+                                </span>
 
                                 <div class="pull-right">
                                     <span style="padding-left: 10px; vertical-align: middle;">{{ $unread->created_at->diffForHumans() }}</span>
@@ -44,6 +49,11 @@
                     </ul>
                 </div>
             @else
+                <div class="blankslate">
+                    <span class="mega-octicon octicon-bell blankslate-icon"></span>
+                    <h3>No notifications</h3>
+                    <p>You've read all your notifications. Good job!</p>
+                </div>
             @endif
         </div> {{-- /Content --}}
     </div>

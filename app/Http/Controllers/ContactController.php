@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Contact; 
+use App\Contact;
 use App\User;
 use App\Notifications\ContactMessage;
 use App\Http\Requests\ContactValidator;
@@ -15,7 +15,7 @@ class ContactController extends Controller
      *
      * @return void
      */
-    public function __construct() 
+    public function __construct()
     {
         $this->middleware('lang');
     }
@@ -38,11 +38,11 @@ class ContactController extends Controller
      */
     public function store(ContactValidator $input)
     {
-        if (Contact::create($input->except('_token'))) {
+        if ($mail = Contact::create($input->except('_token'))) {
             $users = User::role('Admin')->get();
 
             foreach ($users as $user) {
-                $user->notify((new ContactMessage($input)));
+                $user->notify((new ContactMessage($mail)));
             }
 
             flash(trans('contact.contact-store'));

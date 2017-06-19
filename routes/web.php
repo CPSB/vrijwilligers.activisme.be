@@ -29,9 +29,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('backend/contact', 'ContactBackendController', ['names' => [
         'index' => 'contact.backend.index',
         'show'  => 'contact.backend.show',
+        'store' => 'contact.backend.store'
     ]]);
 
     Route::resource('users', 'UserController');
     Route::resource('roles', 'RoleController');
+
+    Route::get('notifications/read.all', 'NotificationsController@markAll')->name('notifications.all-read');
     Route::resource('notifications', 'NotificationsController');
 });

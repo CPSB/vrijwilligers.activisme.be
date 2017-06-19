@@ -12,13 +12,18 @@ class ContactMessage extends Notification
     use Queueable;
 
     /**
+     * @var $data
+     */
+    private $data;
+
+    /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -41,7 +46,9 @@ class ContactMessage extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'message' => 'Yay'
+            'message' => "{$this->data->first_name} {$this->data->last_name} heeft een vraag gesteld. ",
+            'url'     => route('contact.backend.show', ['id' => $this->data->id]),
+            'author'  => auth()->user()->name,
         ];
     }
 }

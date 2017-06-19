@@ -7,10 +7,11 @@
         <div class="col-md-8"> {{-- Content --}}
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <span class="fa fa-envelope" aria-hidden="true"></span> {{ $message->subject }}
+                    Onderwerp: {{ $message->subject }}
 
                     <div class="btn-group pull-right">
-                        <a href="mailto:{{ $message->email }}" class="btn btn-xs btn-default">Mail sender</a>
+                        <a href="" class="btn btn-xs btn-default"><span class="fa fa-undo" aria-hidden="true"></span> Back</a>
+                        <a href="mailto:{{ $message->email }}" class="btn btn-xs btn-default"><span class="fa fa-envelope" aria-hidden="true"></span> Mail sender</a>
                         <a href="" class="btn btn-xs btn-danger">
                             <span class="fa fa-close" aria-hidden="true"></span> Delete
                         </a>

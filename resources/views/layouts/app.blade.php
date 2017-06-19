@@ -12,6 +12,7 @@
 
         {{-- Styles --}}
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.css" rel="stylesheet">
     </head>
     <body>
         <div id="app">
@@ -123,7 +124,7 @@
                                 <li class="{{ Request::is('notifications*') ? 'active' : '' }}">
                                     <a href="{{ route('notifications.index') }}">
                                         <span class="fa fa-bell-o" aria-hidden="true"></span>
-                                        <span class="badge">{{ auth()->user()->notifications->count() }}</span>
+                                        <span class="badge">{{ auth()->user()->unreadNotifications->count() }}</span>
                                     </a>
                                 </li>
                                 <li class="dropdown">
