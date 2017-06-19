@@ -31,8 +31,10 @@
                                         </td>
                                         <td>{{ $message->subject }}</td>
                                         <td>{{ $message->created_at->format('d/m/Y') }}</td>
-                                        <td class="pull-right">
-                                            <a href="{{ route('contact.backend.show', $message) }}" class="label label-info">Show</a>
+                                        <td>
+                                            <a href="{{ route('contact.backend.show', $message) }}" style=""class="pull-right btn btn-info btn-xs">
+                                                <span class="fa fa-info-circle" aria-hidden="true"></span> Show
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
