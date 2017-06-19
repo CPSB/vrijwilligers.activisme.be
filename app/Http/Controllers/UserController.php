@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User; 
+use App\User;
 use App\Role;
 use App\Permission;
 use App\Traits\Authorizable;
@@ -34,7 +34,7 @@ class UserController extends Controller
             $result = User::latest()->paginate(15);
         } else {
             $result = User::latest()
-                ->where('name', 'LIKE', $input->get('term'))
+                ->where('name', 'LIKE', '%'. $input->get('term') .'%')
                 ->paginate(15);
         }
 
@@ -62,14 +62,14 @@ class UserController extends Controller
     {
         $this->validate($resquest, [
             'name'      => 'bail|required|min:2',
-            'email'     => 'required|email|unique:users', 
-            'password'  => 'required|min:6', 
+            'email'     => 'required|email|unique:users',
+            'password'  => 'required|min:6',
             'roles'     => 'required|min:1'
         ]);
 
         $request->merge(['password' => bcrypt($request->get('password'))]); // Hash password.
 
-        // Create user 
+        // Create user
         if ($user = User::create($request->except('roles', 'permissions'))) {
             $this->syncPermissions($request, $user);
             flash('User has been created');
@@ -88,11 +88,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user        = User::find($id); 
+        $user        = User::find($id);
         $roles       = Role::pluck('name', 'id');
         $permissions = Permission::all('name', 'id');
 
-        return view('user.edit', compact('user', 'roles', 'permissions'));  
+        return view('user.edit', compact('user', 'roles', 'permissions'));
     }
 
     /**
@@ -105,12 +105,12 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name'  => 'bail|required|min:2', 
+            'name'  => 'bail|required|min:2',
             'email' => 'required|email|unique:users,email,' . $id,
             'roles' => 'required|min:1'
         ]);
 
-        // Get the user 
+        // Get the user
         $user = User::findOrFail($id);
 
         // Update user
@@ -122,7 +122,7 @@ class UserController extends Controller
 
         // Handle the user roles.
         $this->syncPermissions($request, $user);
-        $user->save(); 
+        $user->save();
 
         flash()->success('User has been updated.');
         return redirect()->route('users.index');
@@ -137,9 +137,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         if (auth()->user()->id == $id) {
-            flash()->warning('Deletion of currently logged in user is not allowed.')->important(); 
+            flash()->warning('Deletion of currently logged in user is not allowed.')->important();
             return redirect()->back();
-        } 
+        }
 
         if (User::findOrFail($id)->delete()) {
             flash()->success('User has been deleted.');
@@ -150,23 +150,23 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    private function syncPermissions(Request $request, $user) 
+    private function syncPermissions(Request $request, $user)
     {
-        // Get the submitted roles. 
+        // Get the submitted roles.
         $roles       = $request->get('roles', []);
         $permissions = $request->get('permissions', []);
 
-        // Get the roles 
-        $roles = Role::find($roles); 
+        // Get the roles
+        $roles = Role::find($roles);
 
-        // check for current role changes. 
-        if (! $user->hasAllRoles($roles)) { // Reset all direct permissions for user. 
-            $user->permissions()->sync([]); 
+        // check for current role changes.
+        if (! $user->hasAllRoles($roles)) { // Reset all direct permissions for user.
+            $user->permissions()->sync([]);
         } else { // Handle permissions
             $user->syncPermissions($permissions);
         }
 
-        $user->syncRoles($roles); 
+        $user->syncRoles($roles);
         return $user;
     }
 }

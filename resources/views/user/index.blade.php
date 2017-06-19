@@ -3,6 +3,32 @@
 @section('title', 'Users')
 
 @section('content')
+    <div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"> {{-- Search modal --}}
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-sm">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><span class="fa fa-search" aria-hidden="true"></span> Search user</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('users.index') }}" id="run" class="form-horizontal" method="GET">
+                        {{ csrf_field() }} {{-- CSRF form protection --}}
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" placeholder="Email" name="term">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-default" form="run"><span class="fa fa-search" aria-hidden="true"></span> Search</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal"><span class="fa fa-close" aria-hidden="true"></span> Close</button>
+                </div>
+            </div>
+        </div>
+    </div> {{-- /search Modal --}}
+
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
@@ -10,8 +36,8 @@
                     <h3 class="modal-title">{{ $result->total() }} {{ str_plural('User', $result->count()) }} </h3>
                 </div>
                 <div class="col-md-7 page-action text-right">
-                    @if ($result->count() > 15)
-                        <a href="" class="btn btn-primary btn-sm"><span class="fa fa-search" aria-hidden="true"></span> Search</a>
+                    @if ((int) $result->count() > 6)
+                        <a href="#" data-toggle="modal" data-target="#search" class="btn btn-default btn-sm"><span class="fa fa-search" aria-hidden="true"></span> Search</a>
                     @endif
 
                     @can('add_users')
