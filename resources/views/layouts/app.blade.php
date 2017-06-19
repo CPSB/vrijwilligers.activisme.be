@@ -81,6 +81,18 @@
 
                         {{-- Right Side Of Navbar --}}
                         <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Taal: NL <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a href="?lang=nl"><span class="flag-icon flag-icon-be"></span> Nederlands</a></li>
+                                    <li><a href="?lang=en"><span class="flag-icon flag-icon-gb"></span> Engels</a></li>
+                                    <li><a href="?lang=fr"><span class="flag-icon flag-icon-fr"></span> Frans</a></li>
+                                </ul>
+                            </li>
+
                             {{-- Authentication Links --}}
                             @if (Auth::guest())
                                 <li class="dropdown">
