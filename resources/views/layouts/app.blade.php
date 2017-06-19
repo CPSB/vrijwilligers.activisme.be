@@ -107,14 +107,16 @@
                                                             <a href="{{ url('auth/twitter') }}" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
                                                         </div>
                                                     @lang('auth.social-or')
-                                                        <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                                                        <form class="form" role="form" method="post" action="{{ url('/login') }}" accept-charset="UTF-8" id="login-nav">
+                                                            {{ csrf_field() }} {{-- CSRF form protection --}}
+
                                                             <div class="form-group">
                                                                 <label class="sr-only" for="exampleInputEmail2">@lang('auth.label-email')</label>
-                                                                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="@lang('auth.login-placeholder-email')" required>
+                                                                <input type="email" name="email" class="form-control" id="exampleInputEmail2" placeholder="@lang('auth.login-placeholder-email')" required>
                                                             </div>
                                                                 <div class="form-group">
                                                                     <label class="sr-only" for="exampleInputPassword2">@lang('auth.label-password')</label>
-                                                                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="@lang('auth.login-placeholder-password')" required>
+                                                                    <input type="password" name="password" class="form-control" id="exampleInputPassword2" placeholder="@lang('auth.login-placeholder-password')" required>
                                                                     <div class="help-block text-right"><a href="">@lang('auth.text-forget-password')</a></div>
                                                                 </div>
                                                                 <div class="form-group">
