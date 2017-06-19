@@ -22,6 +22,7 @@ class NotificationsController extends Controller
     /**
      * Set one notifcation as read.
      *
+     * @param  string $notificationId The id in the database for the notification.
      * @return \Illuminate\Http\RedirectResponse
      */
     public function markOne($notificationId)
