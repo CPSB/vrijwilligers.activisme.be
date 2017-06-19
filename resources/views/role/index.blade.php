@@ -26,7 +26,7 @@
                 </div>
                 <div class="modal-footer">
                     {{ Form::submit('Submit', ['class' => 'btn btn-primary']) }} {{-- Submit form button --}}
-                    <button type="button" class="btn btn-default" data-dissmiss="modal">Close</span>
+                    <button type="button" class="btn btn-default" data-dissmiss="modal">Close</button>
                 </div>
                 {{ Form::close() }}
             </div>
@@ -39,7 +39,7 @@
         </div>
         <div class="col-md-7 page-action text-right">
             @can('add_roles')
-                <a href="#" class="btn btn-sm btn-success pull-right" data-toggle="modal" data-target="#roleModal"> 
+                <a href="#" class="btn btn-sm btn-success pull-right" data-toggle="modal" data-target="#roleModal">
                     <i class="glyphicon glyphicon-plus"></i> New
                 </a>
             @endcan
@@ -53,9 +53,12 @@
             @include('shared._permissions', ['title' => $role->name .' Permissions', 'options' => ['disabled'] ])
         @else
             @include('shared._permissions', ['title' => $role->name .' Permissions', 'model' => $role ])
-            
+
             @can('edit_roles')
                 {!! Form::submit('Save ' . $role->name . ' permissions', ['class' => 'btn btn-primary']) !!}
+                @if ($role->name !== 'Admin' && $role->name !== 'User')
+                    <a href="" class="btn btn-danger"><span class="fa fa-trash" aria-hidden="true"></span> Delete {{ $role->name }}</a>
+                @endif
             @endcan
         @endif
 

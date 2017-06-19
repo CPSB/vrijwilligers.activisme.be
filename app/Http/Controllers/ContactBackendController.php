@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Contact; 
+use App\Contact;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class ContactBackendController extends Controller
 {
-    public function __construct() 
+    public function __construct()
     {
-        $this->middleware('auth'); 
-        $this->middleware('lang'); 
+        $this->middleware('auth');
+        $this->middleware('lang');
         $this->middleware('role:Admin,access_contact');
     }
 
@@ -22,28 +23,7 @@ class ContactBackendController extends Controller
     public function index()
     {
         $unreads = new Contact;
-        return view('contact.backend-index', compact('unreads')); 
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return view('contact.backend-index', compact('unreads'));
     }
 
     /**
@@ -54,30 +34,17 @@ class ContactBackendController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        try {
+            $message = Contact::findOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+            if ($message->is_read === 'N') {
+                $message->update(['is_read' => 'Y', 'read_by' => auth()->user()->id]);
+            }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+            return view('contact.show', compact('message'));
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            return app()->abort(302);
+        }
     }
 
     /**
@@ -88,6 +55,16 @@ class ContactBackendController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $message = Contact::firstOrFail($id);
+
+            if ($message->delete()) {
+                flash('The contact message has been deleted.')->success();
+            }
+
+            return back(302);
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            return app()->abort(302);
+        }
     }
 }

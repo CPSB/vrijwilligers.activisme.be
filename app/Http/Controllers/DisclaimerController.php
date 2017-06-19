@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 class DisclaimerController extends Controller
 {
     /**
-     * Disclaimer constrcutor 
-     *  
+     * Disclaimer constrcutor
+     *
      * @return void
      */
-    public function __construct() 
+    public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('lang');
     }
 
     /**
@@ -23,6 +23,6 @@ class DisclaimerController extends Controller
      */
     public function index()
     {
-        return view('disclaimer.index'); 
+        return view('disclaimer.index');
     }
 }

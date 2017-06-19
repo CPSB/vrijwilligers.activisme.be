@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-md-7 page-action text-right">
                     @if ($result->count() > 15)
-                        <a hre="" class="btn btn-primary btn-sm"><span class="fa fa-search" aria-hidden="true"></span></a> 
+                        <a href="" class="btn btn-primary btn-sm"><span class="fa fa-search" aria-hidden="true"></span> Search</a>
                     @endif
 
                     @can('add_users')

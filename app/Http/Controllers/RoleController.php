@@ -28,7 +28,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles       = Role::all(); 
+        $roles       = Role::all();
         $permissions = Permission::all();
 
         return view('role.index', compact('roles', 'permissions'));
@@ -42,7 +42,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['name' => 'required|unique:roles']); 
+        $this->validate($request, ['name' => 'required|unique:roles']);
 
         if (Role::create($request->only('name'))) {
             flash('Role added.');
@@ -55,7 +55,6 @@ class RoleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)

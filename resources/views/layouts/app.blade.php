@@ -120,8 +120,8 @@
                                         </ul>
                                     </li>
                             @else
-                                <li>
-                                    <a href="">
+                                <li class="{{ Request::is('notifications*') ? 'active' : '' }}">
+                                    <a href="{{ route('notifications.index') }}">
                                         <span class="fa fa-bell-o" aria-hidden="true"></span>
                                         <span class="badge">{{ auth()->user()->notifications->count() }}</span>
                                     </a>

@@ -28,9 +28,10 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::resource('backend/contact', 'ContactBackendController', ['names' => [
         'index' => 'contact.backend.index',
-        'store' => 'contact.backend.store'
+        'show'  => 'contact.backend.show',
     ]]);
 
     Route::resource('users', 'UserController');
     Route::resource('roles', 'RoleController');
+    Route::resource('notifications', 'NotificationsController');
 });
