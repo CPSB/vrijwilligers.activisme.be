@@ -6,6 +6,7 @@ use App\User;
 use App\Role;
 use App\Permission;
 use App\Traits\Authorizable;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -126,6 +127,45 @@ class UserController extends Controller
 
         flash()->success('User has been updated.');
         return redirect()->route('users.index');
+    }
+
+    /**
+     * Block a user in the system.
+     *
+     * @param  Request  $input   The user içnput
+     * @param  Integer  $userId  The user id in the database.
+     * @return mixed
+     */
+    public function block(Request $input, $userId)
+    {
+        try {
+            // TODO: Register route
+            // TODO: Implementation validation handler.
+
+            $user = User::findOrFail($userId);
+
+            if (auth()->user()->can('edit_users') && auth()->user()->can('edit_roles')) {
+                if ($user->bans()->create(['comment' => $input->reason, 'expired_at' => $input->expired])) {
+                    flash("{$user->name} has been banned till {$input->expired}.")->success();
+
+                    return back(302);
+                }
+            }
+
+            return app()->abort(403);
+        } catch(ModelNotFoundException $modelNotFoundException) {
+            return app()->abort(404);
+        }
+    }
+
+    public function unblock($userId)
+    {
+        //
+    }
+
+    public function getByid($userId)
+    {
+
     }
 
     /**

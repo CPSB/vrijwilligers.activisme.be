@@ -174,6 +174,7 @@ return [
         PrettyRoutes\ServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Cog\Ban\Providers\BanServiceProvider::class,
 
         /*
          * Application Service Providers...

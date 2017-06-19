@@ -73,6 +73,16 @@
 
                                 @can('edit_users')
                                     <td class="text-center">
+                                        @if ($item->isBanned())
+                                            <a href="" class="btn btn-xs btn-success">
+                                                <span class="fa fa-unlock" aria-hidden="true"></span> Activeer
+                                            </a>
+                                        @else
+                                            <a href="" class="btn btn-xs btn-warning">
+                                                <span class="fa fa-lock" aria-hidden="true"></span> Blokkeer
+                                            </a>
+                                        @endif
+
                                         @include('shared._actions', ['entity' => 'users', 'id' => $item->id])
                                     </td>
                                 @endcan
