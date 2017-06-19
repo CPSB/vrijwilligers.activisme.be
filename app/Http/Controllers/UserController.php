@@ -160,12 +160,28 @@ class UserController extends Controller
 
     public function unblock($userId)
     {
-        //
+        try {
+            $user = User::findOrFail($userId);
+
+            if ($user->unban()) {
+                flash("{$user->name} is back active.")->success();
+                return redirect()->route('users.index');
+            }
+        } catch(ModelNotFoundException $exception) {
+            return app()->abort(404);
+        }
     }
 
     public function getByid($userId)
     {
+        try {
+            // TODO: Register route.
 
+            $user = User::findOrFail($userId);
+            return response()->json($user);
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            return app()->abort(404);
+        }
     }
 
     /**
