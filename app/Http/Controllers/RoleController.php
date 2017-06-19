@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Role;
 use App\Permission;
 use App\Traits\Authorizable;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -73,5 +74,26 @@ class RoleController extends Controller
         }
 
         return redirect()->route('roles.index');
+    }
+
+    /**
+     * Delete a permission group in the database.
+     * sss
+     * @param  integer $roleId the permission group in the database.
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($roleId)
+    {
+        try {
+            $role = Role::findOrFail($roleId);
+            $role->syncPermissions([]);
+            $role->delete();
+
+            flash('We have deleted the permission group');
+            return redirect()->route('roles.index');
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            flash('We could not delete the permission group.')->error();
+            return redirect()->route('roles.index');
+        }
     }
 }

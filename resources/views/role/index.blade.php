@@ -57,7 +57,10 @@
             @can('edit_roles')
                 {!! Form::submit('Save ' . $role->name . ' permissions', ['class' => 'btn btn-primary']) !!}
                 @if ($role->name !== 'Admin' && $role->name !== 'User')
-                    <a href="" class="btn btn-danger"><span class="fa fa-trash" aria-hidden="true"></span> Delete {{ $role->name }}</a>
+                    <form action="{{ route('roles.destroy', $role) }}" >
+                        {{ method_field('DELETE') }}
+                        <button class="btn btn-danger" type="submit">Delete {{ $role->name }}</button>
+                    </form>
                 @endif
             @endcan
         @endif
