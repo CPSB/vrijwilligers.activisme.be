@@ -32,6 +32,8 @@ Route::group(['middleware' => ['auth']], function() {
         'store' => 'contact.backend.store'
     ]]);
 
+    Route::get('/users/ban/{id}', 'UserController@block')->name('user.ban');
+    Route::get('users/unban/{id}', 'UserController@unblock')->name('user.unban');
     Route::resource('users', 'UserController');
     Route::resource('roles', 'RoleController');
 

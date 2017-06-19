@@ -13,6 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('banned')->only(['backend']);
         $this->middleware('auth')->only(['backend']);
         $this->middleware('lang');
     }
@@ -24,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome'); 
+        return view('welcome');
     }
 
     /**

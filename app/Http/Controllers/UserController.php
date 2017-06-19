@@ -14,13 +14,21 @@ class UserController extends Controller
     use Authorizable;
 
     /**
+     * @var User
+     */
+    private $users;
+
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $users)
     {
+        $this->middleware('banned');
         $this->middleware('lang');
+
+        $this->users = $users;
     }
 
     /**
@@ -61,7 +69,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($resquest, [
+        $this->validate($request, [
             'name'      => 'bail|required|min:2',
             'email'     => 'required|email|unique:users',
             'password'  => 'required|min:6',
@@ -132,21 +140,18 @@ class UserController extends Controller
     /**
      * Block a user in the system.
      *
-     * @param  Request  $input   The user içnput
      * @param  Integer  $userId  The user id in the database.
      * @return mixed
      */
-    public function block(Request $input, $userId)
+    public function block($userId)
     {
         try {
             // TODO: Register route
-            // TODO: Implementation validation handler.
-
-            $user = User::findOrFail($userId);
+            $user = $this->users->findOrFail($userId);
 
             if (auth()->user()->can('edit_users') && auth()->user()->can('edit_roles')) {
-                if ($user->bans()->create(['comment' => $input->reason, 'expired_at' => $input->expired])) {
-                    flash("{$user->name} has been banned till {$input->expired}.")->success();
+                if ($user->ban(['comment' => '+1 week'])) {
+                    flash("{$user->name} has been banned.")->success();
 
                     return back(302);
                 }
@@ -158,28 +163,26 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Unblock a user.
+     *
+     * @param  integer $userId  The user id in the database.
+     * @return mixed
+     */
     public function unblock($userId)
     {
         try {
-            $user = User::findOrFail($userId);
+            $user = $this->users->findOrFail($userId);
 
-            if ($user->unban()) {
-                flash("{$user->name} is back active.")->success();
-                return redirect()->route('users.index');
+            if (auth()->user()->can('edit_users') && auth()->user()->can('edit_roles')) {
+                if ($user->isBanned()) {
+                    $user->unban();
+                    flash("{$user->name} is back active.")->success();
+                }
             }
+
+            return redirect()->route('users.index');
         } catch(ModelNotFoundException $exception) {
-            return app()->abort(404);
-        }
-    }
-
-    public function getByid($userId)
-    {
-        try {
-            // TODO: Register route.
-
-            $user = User::findOrFail($userId);
-            return response()->json($user);
-        } catch (ModelNotFoundException $modelNotFoundException) {
             return app()->abort(404);
         }
     }

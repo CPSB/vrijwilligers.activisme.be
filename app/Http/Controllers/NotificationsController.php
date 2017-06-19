@@ -10,6 +10,18 @@ use Illuminate\Notifications\DatabaseNotification;
 class NotificationsController extends Controller
 {
     /**
+     * NotificationsController constructor.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('banned');
+        $this->middleware('lang');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

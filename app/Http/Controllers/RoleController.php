@@ -19,6 +19,7 @@ class RoleController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('banned');
         $this->middleware('lang');
     }
 

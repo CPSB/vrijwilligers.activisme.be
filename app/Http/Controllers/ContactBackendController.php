@@ -12,6 +12,7 @@ class ContactBackendController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('lang');
+        $this->middleware('banned');
         $this->middleware('role:Admin,access_contact');
     }
 

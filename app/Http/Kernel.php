@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
 {
-    // TODO: Implement laravel ban middlware.
     /**
      * The application's global HTTP middleware stack.
      *
@@ -59,5 +58,6 @@ class Kernel extends HttpKernel
         'guest'      => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'lang'       => \App\Http\Middleware\Language::class,
         'role'       => \App\Http\Middleware\RoleMiddleware::class,
+        'banned'     => \App\Http\Middleware\ForbidBannedUser::class,
     ];
 }

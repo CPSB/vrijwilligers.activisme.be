@@ -8,13 +8,14 @@ use Illuminate\Http\Request;
 class AccountSettingsController extends Controller
 {
     /**
-     * Account Settings constructor 
-     * 
+     * Account Settings constructor
+     *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware('auth'); 
+        $this->middleware('auth');
+        $this->middleware('banned');
         $this->middleware('lang');
     }
 
@@ -26,7 +27,7 @@ class AccountSettingsController extends Controller
     public function index()
     {
         $user = User::findOrFail(auth()->user()->id);
-        return view('auth.settings', compact('user')); 
+        return view('auth.settings', compact('user'));
     }
 
     /**
@@ -54,15 +55,15 @@ class AccountSettingsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */ 
-    public function updateSecurity(Request $request) 
+     */
+    public function updateSecurity(Request $request)
     {
-        $this->validate($request, ['password' => 'required|string|min:6|confirmed']); 
+        $this->validate($request, ['password' => 'required|string|min:6|confirmed']);
 
         if (User::findOrFail(auth()->user()->id)->update(bcrypt($request->all()))) {
             flash(trans('profile-settings.flash-password'))->success();
         }
 
-        return back(302); 
+        return back(302);
     }
 }

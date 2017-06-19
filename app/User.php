@@ -2,12 +2,13 @@
 
 namespace App;
 
+use Cog\Ban\Contracts\HasBans as HasBansContract;
 use Cog\Ban\Traits\HasBans;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasBansContract
 {
     use Notifiable, HasRoles, HasBans;
 
