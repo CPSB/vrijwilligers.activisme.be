@@ -48,7 +48,7 @@ class ContactMessage extends Notification
         return [
             'message' => "{$this->data->first_name} {$this->data->last_name} heeft een vraag gesteld. ",
             'url'     => route('contact.backend.show', ['id' => $this->data->id]),
-            'author'  => auth()->user()->name,
+            'author'  => "{$this->data->first_name} {$this->data->last_name}",
         ];
     }
 }

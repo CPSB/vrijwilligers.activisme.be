@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('users', 'UserController');
     Route::resource('roles', 'RoleController');
 
-    Route::get('notifications/read.all', 'NotificationsController@markAll')->name('notifications.all-read');
-    Route::resource('notifications', 'NotificationsController');
+    Route::get('notifications/mark/{id}', 'NotificationsController@markOne')->name('notifications.mark');
+    Route::get('notifications/read/all', 'NotificationsController@markAll')->name('notifications.all-read');
+    Route::get('notifications/index', 'NotificationsController@index')->name('notifications.index');
 });

@@ -40,7 +40,7 @@
                                 <div class="pull-right">
                                     <span style="padding-left: 10px; vertical-align: middle;">{{ $unread->created_at->diffForHumans() }}</span>
 
-                                    <a style="vertical-align: middle; padding-left: 15px;" href="">
+                                    <a style="vertical-align: middle; padding-left: 15px;" href="{{ route('notifications.mark', $unread) }}">
                                         <span class="text-muted fa fa-check"></span>
                                     </a>
                                 </div>
