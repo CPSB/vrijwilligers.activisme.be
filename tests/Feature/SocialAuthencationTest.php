@@ -12,13 +12,13 @@ class SocialAuthencationTest extends TestCase
 {
     public function testFacebookAuthencation()
     {
-        Socialite::shouldReceive('driver->facebook->scopes->user')->andReturn(true);
+        Socialite::shouldReceive('driver->fields->scopes->user')->with('facebook')->andReturn(true)->;
         $this->get(route('social', ['callback' => 'facebook']));
     }
 
     public function testTwitterAuthencation()
     {
-        Socialite::shouldReceive('driver->twitter')->andReturn();
+        Socialite::shouldReceive('driver->fields->scopes->user')->with('twitter')->andReturn();
         $this->get(route('social', ['callback' => 'twitter']));
     }
 }
