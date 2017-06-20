@@ -9,19 +9,26 @@ use App\Traits\Authorizable;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
+/**
+ * Class UserController
+ *
+ * If tour building a project don't edit these file. Because this file will be overwritten.
+ * When we are updated our project skeleton. And if you found an issue in this controller
+ * User the following links.
+ *
+ * @url https://github.com/CPSB/Skeleton-project
+ * @url https://github.com/CPSB/Skeleton-project/issues
+ */
 class UserController extends Controller
 {
     use Authorizable;
 
-    /**
-     * @var User
-     */
-    private $users;
+    private $users; /** @var User $user The users model in the database. */
 
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param User $users
      */
     public function __construct(User $users)
     {

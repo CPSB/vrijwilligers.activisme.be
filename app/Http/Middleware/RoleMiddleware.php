@@ -2,9 +2,19 @@
 
 namespace App\Http\Middleware;
 
-use Auth; 
+use Auth;
 use Closure;
 
+/**
+ * Class RoleMiddleware
+ *
+ * If you building a project don't edit this file. Because this file will be overwritten.
+ * When we are updated our project skeleton. And if you found an issue in this controller
+ * Use the following links.
+ *
+ * @url https://github.com/CPSB/Skeleton-project
+ * @url https://github.com/CPSB/Skeleton-project/issues
+ */
 class RoleMiddleware
 {
     /**
@@ -12,7 +22,7 @@ class RoleMiddleware
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
-     * @param  string $role 
+     * @param  string $role
      * @param  string $permission
      * @return mixed
      */

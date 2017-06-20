@@ -8,6 +8,16 @@ use App\Traits\Authorizable;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
+/**
+ * Class RoleController
+ *
+ * If tour building a project don't edit these file. Because this file will be overwritten.
+ * When we are updated our project skeleton. And if you found an issue in this controller
+ * User the following links.
+ *
+ * @url https://github.com/CPSB/Skeleton-project
+ * @url https://github.com/CPSB/Skeleton-project/issues
+ */
 class RoleController extends Controller
 {
     use Authorizable;

@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Laravel\Socialite\Facades\Socialite;
 
+/**
+ * Class SocialAuthencation
+ *
+ * If tour building a project don't edit these file. Because this file will be overwritten.
+ * When we are updated our project skeleton. And if you found an issue in this controller
+ * User the following links.
+ *
+ * @url https://github.com/CPSB/Skeleton-project
+ * @url https://github.com/CPSB/Skeleton-project/issues
+ */
 class SocialAuthencation extends Controller
 {
     /**

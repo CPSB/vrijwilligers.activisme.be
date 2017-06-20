@@ -2,10 +2,20 @@
 
 namespace App\Console\Commands;
 
-use App\Role; 
+use App\Role;
 use App\Permission;
 use Illuminate\Console\Command;
 
+/**
+ * Class AuthPermissionCommand
+ *
+ * If you building a project don't edit this file. Because this file will be overwritten.
+ * When we are updated our project skeleton. And if you found an issue in this controller
+ * Use the following links.
+ *
+ * @url https://github.com/CPSB/Skeleton-project
+ * @url https://github.com/CPSB/Skeleton-project/issues
+ */
 class AuthPermissionCommand extends Command
 {
     /**
@@ -73,7 +83,7 @@ class AuthPermissionCommand extends Command
             return $val . '_'. $name;
         }, $abilities);
     }
-    
+
     private function getNameArgument()
     {
         return strtolower(str_plural($this->argument('name')));
