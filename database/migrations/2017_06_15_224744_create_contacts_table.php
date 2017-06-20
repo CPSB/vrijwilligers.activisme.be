@@ -13,17 +13,19 @@ class CreateContactsTable extends Migration
      */
     public function up()
     {
-        Schema::create('contacts', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('read_by')->nullable();
-            $table->string('is_read')->default('N');
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
-            $table->string('email')->nullable();
-            $table->string('subject')->nullable();
-            $table->text('message')->nullable();
-            $table->timestamps();
-        });
+        if (! Schema::hasTable('contacts')) {
+            Schema::create('contacts', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('read_by')->nullable();
+                $table->string('is_read')->default('N');
+                $table->string('first_name')->nullable();
+                $table->string('last_name')->nullable();
+                $table->string('email')->nullable();
+                $table->string('subject')->nullable();
+                $table->text('message')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

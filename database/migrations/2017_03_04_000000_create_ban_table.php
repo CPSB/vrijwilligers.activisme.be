@@ -25,17 +25,19 @@ class CreateBanTable extends Migration
      */
     public function up()
     {
-        Schema::create('ban', function (Blueprint $table) {
-            $table->increments('id');
-            $table->morphs('owned_by');
-            $table->nullableMorphs('created_by');
-            $table->text('comment')->nullable();
-            $table->timestamp('expired_at')->nullable();
-            $table->softDeletes();
-            $table->timestamps();
+        if (! Schema::hasTable('ban')) {
+            Schema::create('ban', function (Blueprint $table) {
+                $table->increments('id');
+                $table->morphs('owned_by');
+                $table->nullableMorphs('created_by');
+                $table->text('comment')->nullable();
+                $table->timestamp('expired_at')->nullable();
+                $table->softDeletes();
+                $table->timestamps();
 
-            $table->index('expired_at');
-        });
+                $table->index('expired_at');
+            });
+        }
     }
 
     /**
