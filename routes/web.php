@@ -27,9 +27,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/settings/password', 'AccountSettingsController@updateSecurity')->name('settings.security');
 
     Route::resource('backend/contact', 'ContactBackendController', ['names' => [
-        'index' => 'contact.backend.index',
-        'show'  => 'contact.backend.show',
-        'store' => 'contact.backend.store'
+        'index'   => 'contact.backend.index',
+        'show'    => 'contact.backend.show',
+        'store'   => 'contact.backend.store',
+        'destroy' => 'contact.backend.destroy'
     ]]);
 
     Route::get('/users/ban/{id}', 'UserController@block')->name('user.ban');
