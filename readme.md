@@ -56,6 +56,6 @@ Generally we won't accept any PR requests to Blender. If you have discovered a b
 
 ### License
 
-Blender and The Laravel framework are open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Project skeleton and The Laravel framework are open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
 
 
