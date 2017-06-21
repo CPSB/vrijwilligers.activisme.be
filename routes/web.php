@@ -42,3 +42,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('notifications/read/all', 'NotificationsController@markAll')->name('notifications.all-read');
     Route::get('notifications/index', 'NotificationsController@index')->name('notifications.index');
 });
+
+/**
+ * Application routes.
+ */
+Route::resource('volunteers', 'VolunteerController');
