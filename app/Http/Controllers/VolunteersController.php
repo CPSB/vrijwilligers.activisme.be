@@ -70,6 +70,7 @@ class VolunteersController extends Controller
                 $user->notify((new NewVolunteer($input)));
             }
         }
+
         return back(302);
     }
 
