@@ -46,4 +46,4 @@ Route::group(['middleware' => ['auth']], function() {
 /**
  * Application routes.
  */
-Route::resource('volunteers', 'VolunteerController');
+Route::resource('volunteers', 'VolunteersController');

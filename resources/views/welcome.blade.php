@@ -43,6 +43,8 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="mailto:informatica@activisme.be">Meld een probleem</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ url('disclaimer') }}">Disclaimer</a>
                 </li>
                 <li class="nav-item">
