@@ -8,7 +8,7 @@ use App\User;
 use App\Volunteers;
 use Illuminate\Http\Request;
 
-class VolunteerController extends Controller
+class VolunteersController extends Controller
 {
     private $volunteers; /** @var Volunteers    $volunteers The database model for the volunteers. */
     private $users;      /** @var Users         $users      The database model for the users.      */
@@ -22,9 +22,31 @@ class VolunteerController extends Controller
     public function __construct(Volunteers $volunteers, User $users)
     {
         $this->middleware('lang');
+        $this->middleware('auth')->only(['index']);
 
         $this->volunteers = $volunteers;
         $this->users      = $users;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $volunteers = $this->volunteers->paginate(25);
+        return view('volunteers.index', compact('volunteers'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -48,7 +70,51 @@ class VolunteerController extends Controller
                 $user->notify((new NewVolunteer($input)));
             }
         }
-
         return back(302);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }

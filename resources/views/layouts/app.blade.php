@@ -38,6 +38,12 @@
                         {{-- Left Side Of Navbar --}}
                         <ul class="nav navbar-nav">
                             @if (Auth::check())
+                                <li class="{{ Request::is('volpunteers*') ? 'active' : '' }}">
+                                    <a href="{{ route('volunteers.index') }}">
+                                        <span class="fa fa-users" aria-hidden="true"></span> Vrijwilligers
+                                    </a>
+                                </li>
+
                                 @if (auth()->check() && auth()->user()->hasRole('Admin'))
                                      <li class="dropdown">
                                         <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
