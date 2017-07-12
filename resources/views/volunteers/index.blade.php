@@ -3,6 +3,8 @@
 @section('title', 'Vrijwilligers')
 
 @section('content')
+    @include('volunteers.create-modal')
+
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
@@ -10,7 +12,9 @@
                     <h3 class="modal-title">Vrijwilligers</h3>
                 </div>
                 <div class="col-md-7 page-action text-right">
-                    <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm"> <i class="glyphicon glyphicon-plus-sign"></i> Nieuwe vrijwilliger</a>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#volunteerCreate">
+                        <i class="glyphicon glyphicon-plus-sign"></i> Nieuwe vrijwilliger
+                    </button>
                 </div>
             </div>
 
@@ -34,7 +38,7 @@
                                     <td>{{ $volunteer->name }}</td>
                                     <td><a href="mailto:{{ $volunteer->email }}">{{ $volunteer->email }}</a></td>
                                     <td></td> {{-- TODO: Set up relation. --}}
-                                    <td>{{ $volunteer->created_at }}</td>µ
+                                    <td>{{ $volunteer->created_at }}</td>
                                     <td>
                                         <a href="" class="btn btn-xs btn-info">
                                             <span class="fa fa-info-circle" aria-hidden="true"></span> Bekijk
