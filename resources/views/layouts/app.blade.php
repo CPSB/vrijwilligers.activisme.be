@@ -64,12 +64,6 @@
                                 @endif
                             @endif
 
-                            <li class="{{ Request::is('disclaimer*') ? 'active' : '' }}">
-                                <a href="{{ route('disclaimer.index') }}">
-                                    <span class="fa fa-legal" aria-hidden="true"></span> Disclaimer
-                                </a>
-                            </li>
-
                             <li class="{{ Request::is('contact*') ? 'active' : '' }} {{ Request::is('backend/contact*') ? 'active' : '' }}">
                                 @if (auth()->check() && auth()->user()->hasRole('Admin'))
                                     <a href="{{ route('contact.backend.index') }}"><span class="fa fa-envelope" aira-hidden="true"></span> Contact</a>
@@ -94,47 +88,7 @@
                             </li>
 
                             {{-- Authentication Links --}}
-                            @if (Auth::guest())
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-sign-in" aria-hidden="true"></span> Login <span class="caret"></span></a>
-                                    <ul id="login-dp" class="dropdown-menu">
-                                        <li>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    @lang('auth.login-by'):
-                                                        <div class="social-buttons">
-                                                            <a href="{{ url('auth/facebook') }}" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-                                                            <a href="{{ url('auth/twitter') }}" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
-                                                        </div>
-                                                    @lang('auth.social-or')
-                                                        <form class="form" role="form" method="post" action="{{ url('/login') }}" accept-charset="UTF-8" id="login-nav">
-                                                            {{ csrf_field() }} {{-- CSRF form protection --}}
-
-                                                            <div class="form-group">
-                                                                <label class="sr-only" for="exampleInputEmail2">@lang('auth.label-email')</label>
-                                                                <input type="email" name="email" class="form-control" id="exampleInputEmail2" placeholder="@lang('auth.login-placeholder-email')" required>
-                                                            </div>
-                                                                <div class="form-group">
-                                                                    <label class="sr-only" for="exampleInputPassword2">@lang('auth.label-password')</label>
-                                                                    <input type="password" name="password" class="form-control" id="exampleInputPassword2" placeholder="@lang('auth.login-placeholder-password')" required>
-                                                                    <div class="help-block text-right"><a href="">@lang('auth.text-forget-password')</a></div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <button type="submit" class="btn btn-primary btn-block">@lang('auth.btn-login')</button>
-                                                                </div>
-                                                                <div class="checkbox">
-                                                                    <label><input type="checkbox"> @lang('auth.keep-me-logged-in') </label>
-                                                                </div>
-                                                        </form>
-                                                    </div>
-                                                    <div class="bottom text-center">
-                                                        @lang('auth.text-new') <a href="{{ url('/register') }}"><b>@lang('auth.hyperlink-register')</b></a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                            @else
+                            @if (Auth::check())
                                 <li class="{{ Request::is('notifications*') ? 'active' : '' }}">
                                     <a href="{{ route('notifications.index') }}">
                                         <span class="fa fa-bell-o" aria-hidden="true"></span>
