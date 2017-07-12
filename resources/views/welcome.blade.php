@@ -41,6 +41,12 @@
         </div>
         <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurred-image-1.jpg">
             <ul class="navbar-nav">
+                @if (auth()->check() && auth()->user()->hasRole('Admin'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('home') }}">Backend</a>
+                    </li>
+                @endif
+
                 <li class="nav-item">
                     <a class="nav-link" href="mailto:informatica@activisme.be">Meld een probleem</a>
                     <a class="nav-link" href="{{ url('disclaimer') }}">Disclaimer</a>
