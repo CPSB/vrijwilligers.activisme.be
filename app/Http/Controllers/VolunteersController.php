@@ -40,16 +40,6 @@ class VolunteersController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store the new volunteer in the database.
      *
      * @param  VolunteerValidator $input
