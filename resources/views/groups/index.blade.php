@@ -19,7 +19,7 @@
                     @if ((int) count($groups) === 0)
                         <div class="alert alert-info alert-important">
                             <strong><span class="fa fa-info-circle" aria-hidden="true"></span> info:</strong>
-                            Er zijn geen vriàjwilligers groepen in het systeem gevonden.
+                            Er zijn geen vrijwilligers groepen in het systeem gevonden.
                         </div>
                     @else
                         @foreach($groups as $group)
@@ -32,15 +32,23 @@
                                         And then one fine morning&mdash; So we beat on, boats against the
                                         current, borne back ceaselessly into the past. <br><br>
 
-                                        <a href="" class="btn btn-info btn-xs"><span class="fa fa-info-circle" aria-hidden="true"></span> Info</a>
-                                        <a href="" class="btn btn-warning btn-xs"><span class="fa fa-pencil" aria-hidden="true"></span> Wijzig</a>
-                                        <a href="" class="btn btn-danger btn-xs"><span class="fa fa-trash" aria-hidden="true"></span> Verwijder</a>
+                                        <a href="" class="btn btn-info btn-xs">
+                                            <span class="fa fa-info-circle" aria-hidden="true"></span> Info
+                                        </a>
+                                        <a href="" class="btn btn-warning btn-xs">
+                                            <span class="fa fa-pencil" aria-hidden="true"></span> Wijzig
+                                        </a>
+                                        <a href="" class="btn btn-danger btn-xs">
+                                            <span class="fa fa-trash" aria-hidden="true"></span> Verwijder
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
 
-                        @if ((int) count($groups) > 15)
+                        @if ((int) count($groups) > 15) {{-- There are more then 15 groups so we need a paginator. --}}
+                            {{ $groups->links() }} {{-- Groups pagination instance --}}
+                        @endif
                     @endif
                 </div>
             </div>

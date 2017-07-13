@@ -13,10 +13,15 @@ class CreateVolunteerGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('volunteer_groups', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-        });
+        if (! Schema::hasTable('volunteer_groups')) {
+            Schema::create('volunteer_groups', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name');
+                $table->text('short_description');
+                $table->text('long_description');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
