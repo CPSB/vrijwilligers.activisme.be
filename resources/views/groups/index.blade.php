@@ -14,7 +14,6 @@
                 </div>
             </div>
 
-            <div class="result-set">
                 <div class="row">
                     @if ((int) count($groups) === 0)
                         <div class="col-md-12">
@@ -46,7 +45,7 @@
                                         <a href="{{ route('groups.edit', $group) }}" class="btn btn-warning btn-xs">
                                             <span class="fa fa-pencil" aria-hidden="true"></span> Wijzig
                                         </a>
-                                        <a href="{{ route('groups.destroy', $group) }}" class="btn btn-danger btn-xs">
+                                        <a href="{{ route('groups.destroy.get', ['id' => $group->id]) }}" class="btn btn-danger btn-xs">
                                             <span class="fa fa-trash" aria-hidden="true"></span> Verwijder
                                         </a>
                                     </div>
@@ -59,7 +58,6 @@
                         @endif
                     @endif
                 </div>
-            </div>
         </div>
     </div>
 @endsection

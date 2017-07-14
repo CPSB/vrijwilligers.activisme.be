@@ -141,6 +141,17 @@ class GroupsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $group = $this->groups->findOrFail($id);
+
+            if ($group->delete()) { // Group has been deleted.
+                flash("{$group->name} is verwijderd uit het systeem.");
+                $group->volunteers()->sync([]);
+            }
+
+            return redirect()->route('groups.index');
+        } catch (ModelNotFoundException $exception) {
+            return app()->abort(404);
+        }
     }
 }

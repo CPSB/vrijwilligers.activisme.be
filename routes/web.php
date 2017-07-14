@@ -49,3 +49,5 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::resource('groups', 'GroupsController');
 Route::resource('volunteers', 'VolunteersController');
+
+Route::get('groups/delete/get/{id}', 'GroupsController@destroy')->name('groups.destroy.get');
