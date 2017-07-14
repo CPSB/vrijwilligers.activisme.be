@@ -13,6 +13,8 @@
         {{-- Styles --}}
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.css" rel="stylesheet">
+
+        @stack('styles')
     </head>
     <body>
         <div id="app">
@@ -38,10 +40,15 @@
                         {{-- Left Side Of Navbar --}}
                         <ul class="nav navbar-nav">
                             @if (Auth::check())
-                                <li class="{{ Request::is('volpunteers*') ? 'active' : '' }}">
-                                    <a href="{{ route('volunteers.index') }}">
-                                        <span class="fa fa-users" aria-hidden="true"></span> Vrijwilligers
+                                <li class="dropdown">
+                                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        <span class="fa fa-users" aria-hidden="true"></span> Vrijwilligers <span class="caret"></span>
                                     </a>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ route('volunteers.index') }}"><span class="fa fa-users" aria-hidden="true"></span> Vrijwilligers</a></li>
+                                        <li><a href="{{ route('groups.index') }}"><span class="fa fa-list" aria-hidden="true"></span> Vrijwilligers groepen</a></li>
+                                    </ul>
                                 </li>
 
                                 @if (auth()->check() && auth()->user()->hasRole('Admin'))

@@ -15,4 +15,14 @@ class Volunteers extends Model
      * @var array
      */
     protected $fillable = ['name', 'email', 'extra_information'];
+
+    /**
+     * Get the groups for the given volunteer through a relation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function volunteerGroups()
+    {
+        return $this->belongsToMany(VolunteerGroups::class)->withTimestamps();
+    }
 }

@@ -5,27 +5,32 @@ namespace App\Http\Controllers;
 use App\Http\Requests\VolunteerValidator;
 use App\Notifications\NewVolunteer;
 use App\User;
+use App\VolunteerGroups;
 use App\Volunteers;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class VolunteersController extends Controller
 {
-    private $volunteers; /** @var Volunteers    $volunteers The database model for the volunteers. */
-    private $users;      /** @var Users         $users      The database model for the users.      */
+    private $volunteers; /** @var Volunteers        $volunteers The database model for the volunteers.          */
+    private $users;      /** @var User              $users      The database model for the users.               */
+    private $groups;     /** @var VolunteerGroups   $groups     The database model for the volunteer groups.    */
 
     /**
      * Volunteer constructor.
      *
      * @param Volunteers $volunteers
      * @param User $users
+     * @param VolunteerGroups $groups
      */
-    public function __construct(Volunteers $volunteers, User $users)
+    public function __construct(Volunteers $volunteers, User $users, VolunteerGroups $groups)
     {
         $this->middleware('lang');
         $this->middleware('auth')->only(['index']);
 
         $this->volunteers = $volunteers;
         $this->users      = $users;
+        $this->groups     = $groups;
     }
 
     /**
@@ -35,18 +40,10 @@ class VolunteersController extends Controller
      */
     public function index()
     {
-        $volunteers = $this->volunteers->paginate(25);
-        return view('volunteers.index', compact('volunteers'));
-    }
+        $volunteers = $this->volunteers->with(['volunteerGroups'])->paginate(25);
+        $groups     = $this->groups->all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('volunteers.index', compact('volunteers', 'groups'));
     }
 
     /**
@@ -57,7 +54,7 @@ class VolunteersController extends Controller
      */
     public function store(VolunteerValidator $input)
     {
-        if ($this->volunteers->create($input->except(['_token']))) {
+        if ($volunteer = $this->volunteers->create($input->except(['_token', 'groups']))) {
             // Create flash data
             session()->flash('strong_msg', 'Bedankt!');
             session()->flash('message',    'Voor je intresse, we nemen spoedig contact met je op!');
@@ -68,6 +65,10 @@ class VolunteersController extends Controller
 
             foreach ($users as $user) {
                 $user->notify((new NewVolunteer($input)));
+            }
+
+            if (! is_null($input->get('groups'))) {
+                $volunteer->volunteerGroups()->sync($input->get('groups'));
             }
         }
 
@@ -93,7 +94,12 @@ class VolunteersController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $volunteer = $this->volunteers->findOrFail($id);
+
+        } catch (ModelNotFoundException $exception) {
+            return app()->abort(302);
+        }
     }
 
     /**
@@ -116,6 +122,17 @@ class VolunteersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $volunteer = $this->volunteers->findOrFail($id);
+
+            if ($volunteer->delete()) { // Volunteer has been deleted.
+                flash('De vrijwilliger is verwijderd.')->success();
+                $volunteer->volunteerGroups()->sync([]);
+            }
+
+            return redirect()->route('volunteers.index');
+        } catch (ModelNotFoundException $exception) {
+            return app()->abort(404);
+        }
     }
 }
