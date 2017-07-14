@@ -148,7 +148,7 @@
 
                                 <h3>Privacybeleid.</h3>
 
-                                <p class="lead">ActivismeBE hecht beland aan uw privacy.</p>
+                                <p class="lead">ActivismeBE hecht belang aan uw privacy.</p>
 
                                 <p class="card-text">In geval de gebruiker van de website om persoonlijke informatie gevraagd wordt:</p>
 

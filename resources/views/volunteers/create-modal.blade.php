@@ -9,7 +9,7 @@
                 <h4 class="modal-title"><span class="fa fa-plus" aria-hidden="true"></span> Nieuwe vrijwilliger</h4>
             </div>
             <div class="modal-body">
-                <form id="newVolunteer" action="{{ route('volunteers.create') }}" class="form-horizontal" method="post">
+                <form id="newVolunteer" action="{{ route('volunteers.store') }}" class="form-horizontal" method="post">
                     {{ csrf_field() }}
 
                     <div class="form-group">
@@ -29,6 +29,30 @@
 
                         <div class="col-md-9">
                             <input type="email" class="form-control" name="email" placeholder="Email adres van de vrijwilliger">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            Vrijw. groepen: <span class="text-danger">*</span>
+                        </label>
+
+                        <div class="col-md-9">
+                            <select class="form-control" name="groups" multiple>
+                                @foreach ($groups as $group)
+                                    <option value="{{ $group->id }}">{{ $group->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            Extra info: <span class="text-danger">*</span>
+                        </label>
+
+                        <div class="col-md-9">
+                            <textarea name="extra_information" class="form-control" rows="5" placeholder="Extra informatie over de vrijwilliger"></textarea>
                         </div>
                     </div>
                 </form>

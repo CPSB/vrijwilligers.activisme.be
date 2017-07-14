@@ -13,6 +13,8 @@
         {{-- Styles --}}
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.css" rel="stylesheet">
+
+        @stack('styles')
     </head>
     <body>
         <div id="app">

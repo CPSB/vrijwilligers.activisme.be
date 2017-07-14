@@ -37,18 +37,35 @@
                                     <td><code>#V{{ $volunteer->id }}</code></td>
                                     <td>{{ $volunteer->name }}</td>
                                     <td><a href="mailto:{{ $volunteer->email }}">{{ $volunteer->email }}</a></td>
-                                    <td></td> {{-- TODO: Set up relation. --}}
-                                    <td>{{ $volunteer->created_at }}</td>
+
                                     <td>
+                                        @if ($volunteer->volunteerGroups()->count() > 0)    {{-- The volunteer has groups --}}
+                                            @foreach ($volunteer->volunteerGroups as $team) {{-- Loop through the groups --}}
+                                                <a href="{{ route('groups.show', $team) }}" class="label label-success">
+                                                    {{ $team->name }}
+                                                </a>
+                                            @endforeach
+                                        @else {{-- Volunteer has no groups --}}
+                                            <span class="label label-danger">Geen</span>
+                                        @endif
+                                    </td>
+
+                                    <td>{{ $volunteer->created_at }}</td>
+                                    <td class="text-center">
+                                        <form id="delete" method="POST" action="{{ route('volunteers.destroy', $volunteer) }}">
+                                            {{ csrf_field()  }}
+                                            {{ method_field('DELETE') }}
+                                        </form>
+
                                         <a href="" class="btn btn-xs btn-info">
                                             <span class="fa fa-info-circle" aria-hidden="true"></span> Bekijk
                                         </a>
                                         <a href="" class="btn btn-xs btn-warning">
                                             <span class="fa fa-pencil" aria-hidden="true"></span> Wijzig
                                         </a>
-                                        <a href="" class="btn btn-xs btn-danger">
+                                        <button form="delete" type="submit" class="btn btn-xs btn-danger">
                                             <span class="fa fa-thrash" aria-hidden="true"></span> Verwijder
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach

@@ -18,7 +18,16 @@ class CreateVolunteerGroupsTable extends Migration
                 $table->increments('id');
                 $table->string('name');
                 $table->text('short_description');
-                $table->text('long_description');
+                $table->text('long_description')->nullable();
+                $table->timestamps();
+            });
+        }
+
+        if (! Schema::hasTable('volunteer_groups_volunteers')) {
+            Schema::create('volunteer_groups_volunteers', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('volunteer_groups_id');
+                $table->integer('volunteers_id');
                 $table->timestamps();
             });
         }
@@ -31,6 +40,7 @@ class CreateVolunteerGroupsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('volunteer_groups_volunteers');
         Schema::dropIfExists('volunteer_groups');
     }
 }
