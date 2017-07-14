@@ -64,7 +64,7 @@
                                             <span class="fa fa-pencil" aria-hidden="true"></span> Wijzig
                                         </a>
                                         <button form="delete" type="submit" class="btn btn-xs btn-danger">
-                                            <span class="fa fa-thrash" aria-hidden="true"></span> Verwijder
+                                            <span class="fa fa-trash" aria-hidden="true"></span> Verwijder
                                         </button>
                                     </td>
                                 </tr>
