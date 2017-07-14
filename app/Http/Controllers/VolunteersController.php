@@ -83,7 +83,12 @@ class VolunteersController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $volunteer = $this->volunteers->findOrFail($id);
+            return view('volunteers.show', compact('volunteer'));
+        } catch (ModelNotFoundException $exception) {
+            return app()->abort(404);
+        }
     }
 
     /**

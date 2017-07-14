@@ -56,7 +56,7 @@
                                                 <td><a href="mailto:{{ $volunteer->email }}">{{ $volunteer->email }}</a></td>
 
                                                 <td class="text-center"> {{-- Actions --}}
-                                                    <a href="" class="label label-info">Bekijk</a>
+                                                    <a href="{{ route('volunteers.show', $volunteer) }}" class="label label-info">Bekijk</a>
                                                     <a href="" class="label label-danger">Ontkoppel</a>
                                                 </td> {{-- /Actions --}}
                                             </tr>

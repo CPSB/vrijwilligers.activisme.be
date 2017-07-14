@@ -57,7 +57,7 @@
                                             {{ method_field('DELETE') }}
                                         </form>
 
-                                        <a href="" class="btn btn-xs btn-info">
+                                        <a href="{{ route('volunteers.show', $volunteer) }}" class="btn btn-xs btn-info">
                                             <span class="fa fa-info-circle" aria-hidden="true"></span> Bekijk
                                         </a>
                                         <a href="" class="btn btn-xs btn-warning">
