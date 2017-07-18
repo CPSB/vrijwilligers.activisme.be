@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\VolunteerGroups;
 use Illuminate\Http\Request;
 
 /**
@@ -35,7 +36,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $data['groups'] = VolunteerGroups::all();
+        return view('welcome', $data);
     }
 
     /**

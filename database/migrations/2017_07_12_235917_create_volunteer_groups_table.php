@@ -17,7 +17,7 @@ class CreateVolunteerGroupsTable extends Migration
             Schema::create('volunteer_groups', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name');
-                $table->string('image_path');
+                $table->string('image_path')->nullable();
                 $table->text('short_description');
                 $table->text('long_description')->nullable();
                 $table->timestamps();
