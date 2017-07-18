@@ -16,7 +16,7 @@ class VolunteerGroups extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'short_description', 'long_description'];
+    protected $fillable = ['name', 'image_path', 'short_description', 'long_description'];
 
     /**
      * Get the members for a group through the relation.
