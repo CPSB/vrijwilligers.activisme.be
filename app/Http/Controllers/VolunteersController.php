@@ -27,6 +27,7 @@ class VolunteersController extends Controller
     {
         $this->middleware('lang');
         $this->middleware('auth')->only(['index']);
+        $this->middleware('auth:Admin')->only(['index']);
         $this->middleware('role:Admin')->only(['index']);
 
         $this->volunteers = $volunteers;
