@@ -7,6 +7,7 @@ use App\Http\Requests\VolunteerValidator;
 use App\VolunteerGroups;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 /**
  * Class GroupsController
@@ -59,6 +60,18 @@ class GroupsController extends Controller
      */
     public function store(GroupValidator $input)
     {
+        // START Image upload
+        $file  = $input->file('image');
+        $path  = 'img/groups/' .  time() . '.' . $file->getClientOriginalExtension();
+        $image = Image::make($file);
+
+        $image->fit(250, 250, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($path);
+
+        $input->merge(['author_id' => auth()->user()->id, 'image_path' => $path]);
+        // END Image upload
+
         if ($group = $this->groups->create($input->all())) {
             flash('De vrijwilligers groep is aangemaakt.')->success();
         }

@@ -25,6 +25,7 @@ class GroupValidator extends FormRequest
     {
         return [
             'name' => 'required',
+            'image' => 'required',
             'short_description' => 'required',
             'long_description' => 'required',
         ];

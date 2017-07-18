@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <form action="{{ route('groups.store') }}" class="form-horizontal" method="POST">
+                    <form action="{{ route('groups.store') }}" class="form-horizontal" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
@@ -29,6 +29,17 @@
                                 @if ($errors->has('name'))
                                     <small class="help-block">{{ ucfirst($errors->first('name')) }}</small>
                                 @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
+                            <label class="control-label col-md-3">
+                                Afbeelding: <span class="text-danger">*</span>
+                            </label>
+
+                            <div class="col-md-9">
+                                <input type="file" name="image" class="form-control">
+                                @if ($errors->has('image')) <small class="help-block">{{ ucfirst($errors->first('image')) }}</small> @endif
                             </div>
                         </div>
 
