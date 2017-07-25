@@ -60,7 +60,7 @@
                                         <a href="{{ route('volunteers.show', $volunteer) }}" class="btn btn-xs btn-info">
                                             <span class="fa fa-info-circle" aria-hidden="true"></span> Bekijk
                                         </a>
-                                        <a href="" class="btn btn-xs btn-warning">
+                                        <a href="{{ route('volunteers.edit', $volunteer) }}" class="btn btn-xs btn-warning">
                                             <span class="fa fa-pencil" aria-hidden="true"></span> Wijzig
                                         </a>
                                         <button form="delete" type="submit" class="btn btn-xs btn-danger">

@@ -57,6 +57,7 @@ class VolunteersController extends Controller
     public function store(VolunteerValidator $input)
     {
         if ($volunteer = $this->volunteers->create($input->except(['_token', 'groups']))) {
+
             // Create flash data
             session()->flash('strong_msg', 'Bedankt!');
             session()->flash('message',    'Voor je intresse, we nemen spoedig contact met je op!');
@@ -102,8 +103,10 @@ class VolunteersController extends Controller
     public function edit($id)
     {
         try {
-            $volunteer = $this->volunteers->findOrFail($id);
+            $volunteer  = $this->volunteers->with(['volunteerGroups'])->findOrFail($id);
+            $groups     = $this->groups->get(['id', 'name']);
 
+            return view('volunteers.edit', compact('volunteer', 'groups'));
         } catch (ModelNotFoundException $exception) {
             return app()->abort(302);
         }
@@ -112,13 +115,27 @@ class VolunteersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  VolunteerValidator $input    The given user input validation instance.
+     * @param  integer            $id       The volunteer id in the database.
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(VolunteerValidator $input, $id)
     {
-        //
+        try { // Try to find the volunteer in the system. Based on his id.
+            $volunteer = $this->volunteers->findOrFail($input);
+
+            if ($volunteer->update($input->except(['_token', 'groups']))) {
+                if (! is_null($input->groups)) {
+                    $volunteer->volunteerGroups()->sync($input->groups);
+                }
+
+                flash('De vrijwilliger is successvol aangepast in het systeem.')->success();
+            }
+
+            return back();
+        } catch (ModelNotFoundException $exception) {
+            return app()->abort(404); // Volunteer not found. So throw a 404 HTTP CODE.
+        }
     }
 
     /**
