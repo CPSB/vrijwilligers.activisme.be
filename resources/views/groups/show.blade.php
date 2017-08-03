@@ -56,8 +56,9 @@
                                                 <td><a href="mailto:{{ $volunteer->email }}">{{ $volunteer->email }}</a></td>
 
                                                 <td class="text-center"> {{-- Actions --}}
-                                                    <a href="{{ route('volunteers.show', $volunteer) }}" class="label label-info">Bekijk</a>
-                                                    <a href="" class="label label-danger">Ontkoppel</a>
+                                                    <a href="mailto:{{ $volunteer->email }}" class="btn btn-xs btn-primary">Mail</a>
+                                                    <a href="{{ route('volunteers.show', $volunteer) }}" class="btn btn-xs btn-info">Bekijk</a>
+                                                    <a href="" class="btn btn-xs btn-danger">Ontkoppel</a>
                                                 </td> {{-- /Actions --}}
                                             </tr>
                                         @endforeach {{-- /Loop through volunteers --}}
