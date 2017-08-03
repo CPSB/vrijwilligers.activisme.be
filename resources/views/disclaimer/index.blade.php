@@ -45,6 +45,9 @@
                     <a class="nav-link" href="mailto:informatica@activisme.be">Meld een probleem</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ url('disclaimer') }}">Disclaimer</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" rel="tooltip" href="https://twitter.com/Activisme_be" target="_blank">
                         <i class="fa fa-twitter"></i>
                         <p class="hidden-lg-up">Twitter</p>
@@ -145,7 +148,7 @@
 
                                 <h3>Privacybeleid.</h3>
 
-                                <p class="lead">ActivismeBE hecht beland aan uw privacy.</p>
+                                <p class="lead">ActivismeBE hecht belang aan uw privacy.</p>
 
                                 <p class="card-text">In geval de gebruiker van de website om persoonlijke informatie gevraagd wordt:</p>
 
@@ -244,5 +247,16 @@
 <script src="{{ asset('js/now-ui-kit.js') }}" type="text/javascript"></script>
 
 <script> $('div.alert').not('.alert-important').delay(2000).slideUp(300); </script>
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-102557383-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
 
 </html>

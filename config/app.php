@@ -162,6 +162,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -175,6 +176,7 @@ return [
         Spatie\Backup\BackupServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Cog\Ban\Providers\BanServiceProvider::class,
+        AdamWathan\BootForms\BootFormsServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -241,6 +243,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'BootForm' => AdamWathan\BootForms\Facades\BootForm::class
 
     ],
 

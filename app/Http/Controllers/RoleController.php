@@ -31,6 +31,7 @@ class RoleController extends Controller
     {
         $this->middleware('banned');
         $this->middleware('lang');
+        $this->middleware('role:Admin');
     }
 
     /**

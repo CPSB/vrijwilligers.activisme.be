@@ -41,6 +41,15 @@
         </div>
         <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurred-image-1.jpg">
             <ul class="navbar-nav">
+                @if (auth()->check() && auth()->user()->hasRole('Admin'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('home') }}">Backend</a>
+                    </li>
+                @endif
+
+                <li class="nav-item">
+                    <a class="nav-link" href="mailto:informatica@activisme.be">Meld een probleem</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('disclaimer') }}">Disclaimer</a>
                 </li>
@@ -160,67 +169,17 @@
             <h2 class="title">Wij zoeken mensen voor.</h2>
             <div class="team">
                 <div class="row">
-
-                    <div class="col-md-4">
-                        <div class="team-player">
-                            <img src="{{ asset('img/developer.jpg') }}" style="height:100px; width:100px;" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
-                            <h4 class="title">Ploeg informatica</h4>
-                            <p class="description">
-                                Ploeg informatie staat mee met de kern verantwoordelijke in voor het onderhoud en uitbreiding van onze informatica systemen en webplatformen tevens ook voor de communicatie intern.
-                            </p>
+                    @foreach ($groups as $group)
+                        <div class="col-md-4">
+                            <div class="team-player">
+                                <img src="{{ asset($group->image_path) }}" style="height:100px; width:100px;" alt="{{ $group->name }}" class="rounded-circle img-fluid img-raised">
+                                <h4 class="title">{{ $group->name }}</h4>
+                                <p class="description">
+                                    {{ $group->short_description }}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="team-player">
-                            <img src="{{ asset('img/grafisch.png') }}" style="height:100px; width:100px;" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
-                            <h4 class="title">Ploeg grafische</h4>
-                            <p class="description">
-                                Ploeg grafische staat in voor al het drukwerk afkomstig van Activisme_BE. Als ook bepaal je mee het online landschap en uitzicht van de organistaie en haar bijhorende acties.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="team-player">
-                            <img src="{{ asset('img/volunteer.jpg') }}" style="height:100px; width:100px;" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
-                            <h4 class="title">Losse vrijwilligers</h4>
-                            <p class="description">
-                                Losse vrijwilligers zijn mensen die wel engagement hebben. Maar rustig willen beginnen of niet altijd kunnen helpen waar nodig. Maar dat is niet nodig. Je bent niet minder belangrijker dan de rest.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="team-player">
-                            <img src="{{ asset('img/welfare.jpg') }}" style="height:100px; width:100px;" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
-                            <h4 class="title">Ploeg Armoedebestrijding</h4>
-                            <p class="description">
-                                Deze ploeg staat in voor de bedeel caravan. Een project waarmee Activisme_BE door vlaanderen wilt rijden als mobiele voedsel en spullen bank. Je helpt hiermee de armen en kansarmen
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="team-player">
-                            <img src="{{ asset('img/writer.jpg') }}" style="height:100px; width:100px;" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
-                            <h4 class="title">Ploeg autheurs</h4>
-                            <p class="description">
-                                Geen enkele actie en of platform staat recht zonder tekst. Daarom hebben we mensen nodig in deze ploeg. Je verzorgd mee de teksten die we gebruiken in platformen en acties die we voeren.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="team-player">
-                            <img src="{{ asset('img/activist.png') }}" style="height:100px; width:100px;" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
-                            <h4 class="title">Ploeg activisten</h4>
-                            <p class="description">
-                                We komen ook op straat waar we ludieke acties plannen. Maar voor de uitvoering hebben we activisten nodig. Deze ploeg bepaald het overkomen en beeld van de organisatie op straat.
-                            </p>
-                        </div>
-                    </div>
-
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -311,5 +270,16 @@
 <script src="{{ asset('js/now-ui-kit.js') }}" type="text/javascript"></script>
 
 <script> $('div.alert').not('.alert-important').delay(3000).slideUp(300); </script>
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-102557383-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
 
 </html>

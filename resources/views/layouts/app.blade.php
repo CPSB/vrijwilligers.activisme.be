@@ -13,6 +13,8 @@
         {{-- Styles --}}
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.css" rel="stylesheet">
+
+        @stack('styles')
     </head>
     <body>
         <div id="app">
@@ -38,6 +40,17 @@
                         {{-- Left Side Of Navbar --}}
                         <ul class="nav navbar-nav">
                             @if (Auth::check())
+                                <li class="dropdown">
+                                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        <span class="fa fa-users" aria-hidden="true"></span> Vrijwilligers <span class="caret"></span>
+                                    </a>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ route('volunteers.index') }}"><span class="fa fa-users" aria-hidden="true"></span> Vrijwilligers</a></li>
+                                        <li><a href="{{ route('groups.index') }}"><span class="fa fa-list" aria-hidden="true"></span> Vrijwilligers groepen</a></li>
+                                    </ul>
+                                </li>
+
                                 @if (auth()->check() && auth()->user()->hasRole('Admin'))
                                      <li class="dropdown">
                                         <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -64,12 +77,6 @@
                                 @endif
                             @endif
 
-                            <li class="{{ Request::is('disclaimer*') ? 'active' : '' }}">
-                                <a href="{{ route('disclaimer.index') }}">
-                                    <span class="fa fa-legal" aria-hidden="true"></span> Disclaimer
-                                </a>
-                            </li>
-
                             <li class="{{ Request::is('contact*') ? 'active' : '' }} {{ Request::is('backend/contact*') ? 'active' : '' }}">
                                 @if (auth()->check() && auth()->user()->hasRole('Admin'))
                                     <a href="{{ route('contact.backend.index') }}"><span class="fa fa-envelope" aira-hidden="true"></span> Contact</a>
@@ -94,47 +101,7 @@
                             </li>
 
                             {{-- Authentication Links --}}
-                            @if (Auth::guest())
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-sign-in" aria-hidden="true"></span> Login <span class="caret"></span></a>
-                                    <ul id="login-dp" class="dropdown-menu">
-                                        <li>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    @lang('auth.login-by'):
-                                                        <div class="social-buttons">
-                                                            <a href="{{ url('auth/facebook') }}" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-                                                            <a href="{{ url('auth/twitter') }}" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
-                                                        </div>
-                                                    @lang('auth.social-or')
-                                                        <form class="form" role="form" method="post" action="{{ url('/login') }}" accept-charset="UTF-8" id="login-nav">
-                                                            {{ csrf_field() }} {{-- CSRF form protection --}}
-
-                                                            <div class="form-group">
-                                                                <label class="sr-only" for="exampleInputEmail2">@lang('auth.label-email')</label>
-                                                                <input type="email" name="email" class="form-control" id="exampleInputEmail2" placeholder="@lang('auth.login-placeholder-email')" required>
-                                                            </div>
-                                                                <div class="form-group">
-                                                                    <label class="sr-only" for="exampleInputPassword2">@lang('auth.label-password')</label>
-                                                                    <input type="password" name="password" class="form-control" id="exampleInputPassword2" placeholder="@lang('auth.login-placeholder-password')" required>
-                                                                    <div class="help-block text-right"><a href="">@lang('auth.text-forget-password')</a></div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <button type="submit" class="btn btn-primary btn-block">@lang('auth.btn-login')</button>
-                                                                </div>
-                                                                <div class="checkbox">
-                                                                    <label><input type="checkbox"> @lang('auth.keep-me-logged-in') </label>
-                                                                </div>
-                                                        </form>
-                                                    </div>
-                                                    <div class="bottom text-center">
-                                                        @lang('auth.text-new') <a href="{{ url('/register') }}"><b>@lang('auth.hyperlink-register')</b></a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                            @else
+                            @if (Auth::check())
                                 <li class="{{ Request::is('notifications*') ? 'active' : '' }}">
                                     <a href="{{ route('notifications.index') }}">
                                         <span class="fa fa-bell-o" aria-hidden="true"></span>
@@ -188,6 +155,17 @@
                 // flash auto hide
                 $('#flash-msg .alert').not('.alert-danger, .alert-important').delay(6000).slideUp(500);
             })
+        </script>
+
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-102557383-1', 'auto');
+            ga('send', 'pageview');
+
         </script>
     </body>
 </html>
